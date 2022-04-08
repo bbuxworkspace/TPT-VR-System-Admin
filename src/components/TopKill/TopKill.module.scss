@@ -1,0 +1,40 @@
+.wrapper {
+  background: url(../../assets/TopKill/topKillBG.svg) no-repeat center center;
+  background-size: cover;
+  width: 735px;
+  height: 214px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 70px;
+  font-family: "Oswald" !important;
+  font-weight: bold;
+}
+
+.mid {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
+  background: #191d31 !important;
+  width: 360px;
+  height: 235px;
+}
+
+.left,
+.right {
+  font-size: 110px;
+  color: #fff;
+  width: 120px;
+  //   background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// .left {
+// }
+
+// .right {
+// }

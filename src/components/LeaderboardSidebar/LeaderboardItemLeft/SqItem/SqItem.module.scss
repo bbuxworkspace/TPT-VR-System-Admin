@@ -1,0 +1,19 @@
+.wrapper{
+    width: 10px;
+    height: 10px;
+    border: 1px solid #161616;
+    transform: rotate(45deg);
+    background: #161616;
+    margin-right: 8px !important;
+}
+
+.wrapper.active{
+    background: #161616;
+    border-color: #000;
+}
+
+.wrapper.done{
+    border: 1px solid #fff;
+    transform: rotate(45deg);
+    background: #fff;
+}
