@@ -14,15 +14,17 @@ import TeamDetailsPage from "./views/TeamDetailsPage/TeamDetailsPage";
 import AddTeamPage from "./views/AddTeamPage/AddTeamPage";
 import EditTeamPage from "./views/EditTeamPage/EditTeamPage";
 import EditPlayerPage from "./views/EditPlayerPage/EditPlayerPage";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getRefreshToken } from "./actions/Dashboard.action";
+import CategoryPage from "./views/CategoryPage/CategoryPage";
 
-function App() {
-  const dispatch = useDispatch();
-
+function App({ getRefreshToken }) {
   useEffect(() => {
-    dispatch(getRefreshToken());
-  }, []);
+    if (localStorage.getItem("token_book")) {
+      setAuthToken(localStorage.getItem("token_book"));
+    }
+    getRefreshToken();
+  }, [getRefreshToken]);
 
   return (
     <>
@@ -34,6 +36,7 @@ function App() {
           <Route path="/*" element={<PrivateOutlet />}>
             <>
               <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="category" element={<CategoryPage />} />
               <Route path="players" element={<PlayerListPage />} />
               <Route path="players/add-player" element={<AddPlayerPage />} />
               <Route path="players/:id/edit" element={<EditPlayerPage />} />
@@ -50,4 +53,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { getRefreshToken })(App);

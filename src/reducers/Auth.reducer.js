@@ -9,22 +9,18 @@ import {
 } from "../constants/Type";
 
 const initialState = {
-  token: localStorage.getItem("token_anbs") || "",
+  token: localStorage.getItem("token_book") || "",
   isAuthenticated: false,
-  user: {},
+  user: null,
   loading: true,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      localStorage.setItem("token_anbs", action.payload.token);
       return {
         ...state,
-        isAuthenticated: true,
         loading: false,
-        token: action.payload.token,
-        user: action.payload.data,
       };
 
     case ACCESS_TOKEN_SUCCESS:
@@ -32,6 +28,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         token: action.payload,
         isAuthenticated: true,
+        loading: false,
+      };
+    case AUTH_USER_LOAD:
+      return {
+        ...state,
+        user: [...action.payload],
         loading: false,
       };
     case ACCESS_TOKEN_ERROR:
@@ -44,8 +46,7 @@ const authReducer = (state = initialState, action) => {
 
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
-    case LOGOUT_FAIL:
-      localStorage.removeItem("token_anbs");
+      localStorage.removeItem("token_book");
       return {
         ...state,
         token: "",

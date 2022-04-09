@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const PrivateOutlet = ({ auth, loading }) => {
   const navigate = useNavigate();
@@ -15,8 +15,12 @@ const PrivateOutlet = ({ auth, loading }) => {
       }
     }
   }, [auth]);
-  // return auth === true && loading === false ? <Outlet /> : null;
-  return <Outlet />;
+  return auth === true && loading === false ? (
+    <Outlet />
+  ) : (
+    <Navigate to={`/`} />
+  );
+  //return <Outlet />;
 };
 
 const mapStateToProps = (state) => ({

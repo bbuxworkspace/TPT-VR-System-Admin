@@ -39,6 +39,7 @@ const Login = ({ login }) => {
     } else {
       setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   let initVals = {
@@ -47,10 +48,10 @@ const Login = ({ login }) => {
   };
 
   const SignupSchema = Yup.object().shape({
-    email: Yup.string().required("Username is required!"),
+    email: Yup.string().required("Phone is required!"),
     password: Yup.string()
       .required("Password is required!")
-      .min(4, "Password is too short!"),
+      .min(6, "Password is too short!"),
   });
   return (
     <>
@@ -72,12 +73,12 @@ const Login = ({ login }) => {
                   <InputGroup className="mb-3 d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center pb-2">
                       <label htmlFor="email" className="d-block">
-                        Username
+                        Phone
                       </label>
                     </div>
                     <Field
                       as={BootstrapForm.Control}
-                      placeholder="Type username..."
+                      placeholder="Type Phone..."
                       name="email"
                       isValid={!errors.email && touched.email}
                       type="text"

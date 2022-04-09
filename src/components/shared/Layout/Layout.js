@@ -15,9 +15,9 @@ import {
   AiOutlineUser,
   AiOutlineUserAdd,
   AiOutlineUsergroupAdd,
+  AiOutlineHome,
 } from "react-icons/ai";
 import { CgGames } from "react-icons/cg";
-import logo from "../../../assets/logo.png";
 
 const Layout = ({ logout, children, title }) => {
   const navigate = useNavigate();
@@ -35,16 +35,11 @@ const Layout = ({ logout, children, title }) => {
         <Row className="position-relative">
           <Col
             md={2}
-            className={`px-4 ${styles.wrapper} ${show ? styles.active : ""}`}
+            className={`px-4 pt-md-4 pt-0 ${styles.wrapper} ${
+              show ? styles.active : ""
+            }`}
           >
             <div className="d-flex justify-content-between align-items-center w-100">
-              <Link
-                to="/"
-                className="d-flex align-items-center py-3 text-decoration-none text-dark"
-              >
-                <img src={logo} alt="" className={styles.logo} />
-                {/* <span className="d-block fs-4 ">Angular Esports</span> */}
-              </Link>
               <div
                 className={`${styles.ham}  ms-auto`}
                 onClick={() => setShow(!show)}
@@ -54,11 +49,19 @@ const Layout = ({ logout, children, title }) => {
             </div>
 
             <div className={styles.nav}>
-              <NavLink to="/players" className={styles.nav__item}>
+              <NavLink to="/dashboard" className={styles.nav__item}>
+                <span className={styles.icon}>
+                  <AiOutlineHome />
+                </span>
+                <span className={styles.nav__item_text}>Dashboard</span>
+              </NavLink>
+            </div>
+            <div className={styles.nav}>
+              <NavLink to="/users" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <AiOutlineUser />
                 </span>
-                <span className={styles.nav__item_text}>Players</span>
+                <span className={styles.nav__item_text}>Dashboard</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
@@ -79,11 +82,11 @@ const Layout = ({ logout, children, title }) => {
               </NavLink>
             </div>
             <div className={styles.nav}>
-              <NavLink to="/screens" className={styles.nav__item}>
+              <NavLink to="/category" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <BsFolderPlus />
                 </span>
-                <span className={styles.nav__item_text}>Screens</span>
+                <span className={styles.nav__item_text}>Category</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
@@ -128,8 +131,5 @@ const Layout = ({ logout, children, title }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
-  role: state.auth.user.userType,
-});
 
-export default connect(mapStateToProps, { logout })(Layout);
+export default connect(null, { logout })(Layout);
