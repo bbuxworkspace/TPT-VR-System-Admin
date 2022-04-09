@@ -4,7 +4,6 @@ import "./App.css";
 import { LoginPage, DashboardPage } from "./views";
 import { ToastContainer } from "react-toastify";
 import PrivateOutlet from "./utils/PrivateOutlet";
-import AddPlayerPage from "./views/AddPlayerPage/AddPlayerPage";
 import PlayerListPage from "./views/PlayerListPage/PlayerListPage";
 import { useEffect } from "react";
 import setAuthToken from "./utils/setAuthToken";
@@ -17,6 +16,7 @@ import EditPlayerPage from "./views/EditPlayerPage/EditPlayerPage";
 import { connect, useDispatch } from "react-redux";
 import { getRefreshToken } from "./actions/Dashboard.action";
 import CategoryPage from "./views/CategoryPage/CategoryPage";
+import AddCategory from "./views/AddCategory/AddCategory";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -37,8 +37,8 @@ function App({ getRefreshToken }) {
             <>
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="category" element={<CategoryPage />} />
+              <Route path="category/add" element={<AddCategory />} />
               <Route path="players" element={<PlayerListPage />} />
-              <Route path="players/add-player" element={<AddPlayerPage />} />
               <Route path="players/:id/edit" element={<EditPlayerPage />} />
               <Route path="players/:id" element={<PlayerDetailsPage />} />
               <Route path="team" element={<TeamListPage />} />
