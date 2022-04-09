@@ -1,38 +1,38 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
-  CREATE_CATEGORY,
-  CREATE_CATEGORY_ERROR,
-  DELETE_CATEGORY,
-  DELETE_CATEGORY_ERROR,
-  GET_CATEGORY_LIST,
-  UPDATE_CATEGORY,
-  UPDATE_CATEGORY_ERROR,
+  CREATE_SUBCATEGORY,
+  CREATE_SUBCATEGORY_ERROR,
+  DELETE_SUBCATEGORY,
+  DELETE_SUBCATEGORY_ERROR,
+  GET_SUBCATEGORY_LIST,
+  UPDATE_SUBCATEGORY,
+  UPDATE_SUBCATEGORY_ERROR,
 } from "../constants/Type";
 import { BASE_URL } from "../constants/URL";
 import { getRefreshToken } from "./Dashboard.action";
 
-//GET Category LIST
-export const getCategoryList = () => async (dispatch) => {
+//GET SubCategory LIST
+export const getSubCategoryList = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`${BASE_URL}/api/v1/category`);
+    const res = await axios.get(`${BASE_URL}/api/v1/subCategory/${id}`);
 
     dispatch({
-      type: GET_CATEGORY_LIST,
-      payload: res.data.categorys,
+      type: GET_SUBCATEGORY_LIST,
+      payload: res.data.subCategorys,
     });
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
-      await dispatch(getCategoryList());
+      await dispatch(getSubCategoryList(id));
     } else {
       console.log(err);
     }
   }
 };
 
-// CREATE Category
-export const createCategory = (values) => async (dispatch) => {
+// CREATE SubCategory
+export const createSubCategory = (values, id) => async (dispatch) => {
   let formData = {
     name: values.name,
   };
@@ -45,23 +45,23 @@ export const createCategory = (values) => async (dispatch) => {
   try {
     // TODO ::: API CALL
     const res = await axios.post(
-      `${BASE_URL}/api/v1/category`,
+      `${BASE_URL}/api/v1/subCategory/${id}`,
       JSON.stringify(formData),
       config
     );
     dispatch({
-      type: CREATE_CATEGORY,
+      type: CREATE_SUBCATEGORY,
     });
-    toast.success("Category created successfully");
-    dispatch(getCategoryList());
+    toast.success("Sub Category created successfully");
+    dispatch(getSubCategoryList(id));
     return true;
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
-      await dispatch(createCategory(values));
+      await dispatch(createSubCategory(values, id));
     } else {
       dispatch({
-        type: CREATE_CATEGORY_ERROR,
+        type: CREATE_SUBCATEGORY_ERROR,
       });
     }
 
@@ -69,10 +69,11 @@ export const createCategory = (values) => async (dispatch) => {
   }
 };
 
-// Update Category
-export const updateCategory = (values, id) => async (dispatch) => {
+// Update SubCategory
+export const updateSubCategory = (values, id, catId) => async (dispatch) => {
   let formData = {
     name: values.name,
+    categoryId: catId,
   };
 
   const config = {
@@ -83,23 +84,23 @@ export const updateCategory = (values, id) => async (dispatch) => {
   try {
     // TODO ::: API CALL
     const res = await axios.patch(
-      `${BASE_URL}/api/v1/category/${id}`,
+      `${BASE_URL}/api/v1/subCategory/${id}`,
       JSON.stringify(formData),
       config
     );
     dispatch({
-      type: UPDATE_CATEGORY,
+      type: UPDATE_SUBCATEGORY,
     });
-    toast.success("Category updated successfully");
-    dispatch(getCategoryList());
+    toast.success("Sub Category updated successfully");
+    dispatch(getSubCategoryList(catId));
     return true;
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
-      await dispatch(updateCategory(values, id));
+      await dispatch(updateSubCategory(values, id, catId));
     } else {
       dispatch({
-        type: UPDATE_CATEGORY_ERROR,
+        type: UPDATE_SUBCATEGORY_ERROR,
       });
     }
 
@@ -107,22 +108,22 @@ export const updateCategory = (values, id) => async (dispatch) => {
   }
 };
 
-//DELETE  Category
-export const deleteCategory = (id) => async (dispatch) => {
+//DELETE  SubCategory
+export const deleteSubCategory = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(`${BASE_URL}/api/v1/category/${id}`);
+    const res = await axios.delete(`${BASE_URL}/api/v1/subCategory/${id}`);
     dispatch({
-      type: DELETE_CATEGORY,
+      type: DELETE_SUBCATEGORY,
       payload: id,
     });
     return true;
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
-      await dispatch(deleteCategory(id));
+      await dispatch(deleteSubCategory(id));
     } else {
       dispatch({
-        type: DELETE_CATEGORY_ERROR,
+        type: DELETE_SUBCATEGORY_ERROR,
       });
     }
 

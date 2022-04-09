@@ -17,6 +17,8 @@ import { getRefreshToken } from "./actions/Dashboard.action";
 import CategoryPage from "./views/CategoryPage/CategoryPage";
 import AddCategory from "./views/AddCategory/AddCategory";
 import "./App.css";
+import SubCategoryPage from "./views/SubCategoryPage/SubCategoryPage";
+import AddSubCategory from "./views/AddSubCategory/AddSubCategory";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -41,6 +43,15 @@ function App({ getRefreshToken }) {
               <Route
                 path="category/:id/edit"
                 element={<AddCategory edit={true} />}
+              />
+              <Route path="category/:catId" element={<SubCategoryPage />} />
+              <Route
+                path="subcategory/add/:catId"
+                element={<AddSubCategory />}
+              />
+              <Route
+                path="subcategory/:id/edit"
+                element={<AddSubCategory edit={true} />}
               />
               <Route path="players" element={<PlayerListPage />} />
               <Route path="players/:id/edit" element={<EditPlayerPage />} />
