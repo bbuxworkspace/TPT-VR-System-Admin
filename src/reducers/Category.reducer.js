@@ -1,4 +1,4 @@
-import { GET_CATEGORY_LIST } from "../constants/Type";
+import { DELETE_CATEGORY, GET_CATEGORY_LIST } from "../constants/Type";
 
 const initialState = {
   category: null,
@@ -13,6 +13,12 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         category: payload,
+        loading: false,
+      };
+    case DELETE_CATEGORY:
+      return {
+        ...state,
+        category: state.category.filter((category) => category._id !== payload),
         loading: false,
       };
     default:

@@ -1,17 +1,17 @@
 :root {
   --primary: #f68a3c;
   --primary-hover: #fa6e0a;
-  --secondary: rgb(104, 104, 104);
-  --secondary-500: rgba(141, 141, 141, 0.5);
+  --secondary: rgb(133, 133, 133);
+  --secondary-500: rgba(211, 211, 211, 0.5);
   --danger: #dc3545;
   --danger-hover: #a52734;
   --dark: #1f1f1f;
   --dark-bg: #333333;
-  --light: #fff;
+  --light: #ebebeb;
+  --white: #fff;
   --light-bg: #444444;
   --border: #4d4d4d;
 }
-
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 
 body {
@@ -31,7 +31,7 @@ code {
 }
 
 .form-control {
-  border-radius: 0 !important;
+  border-radius: 15px !important;
 }
 
 select.form-select option:hover {
@@ -39,28 +39,49 @@ select.form-select option:hover {
 }
 
 
+
 .bg_dark {
-  background-color: var(--dark) !important;
+  background: var(--light) !important;
 }
-.bg_dark_bg {
-  background-color: var(--dark-bg) !important;
-}
-
-#user .dropdown-menu.show {
-  background: var(--dark-bg) !important;
+.bg_light {
+  background: var(--light) !important;
 }
 
-/* .pnlm-hotspot-base.pnlm-hotspot.pnlm-sprite.pnlm-info.pnlm-tooltip {
-  background: var(--danger) !important;
-  width: 20px !important;
-  height: 20px !important;
-} */
+.crd {
+  border-radius: 15px !important;
+  overflow: hidden;
+  width: 100%;
+  background: var(--white) !important;
+  border: 1px solid var(--white) !important;
+}
 
-/* img,
-svg {
-  vertical-align: text-top !important;
-} */
+.btn_primary {
+  outline: none !important;
+  border: none !important;
+  padding: 8px 26px !important;
+  font-weight: bold !important;
+  border-radius: 30px !important;
+  color: var(--dark) !important;
+  background: linear-gradient(90deg, #ffe502 0%, #ffa602 100%) !important;
+  transition: 0.3s all ease-in-out;
+}
 
-.text_primary {
-  color: var(--primary) !important;
+.btn_primary:hover {
+  background: linear-gradient(90deg, #fae41a 0%, #fcaf22 100%) !important;
+  transition: 0.3s all ease-in-out;
+}
+.btn_danger {
+  outline: none !important;
+  border: none !important;
+  padding: 8px 26px !important;
+  font-weight: bold !important;
+  border-radius: 30px !important;
+  color: var(--white) !important;
+  background: linear-gradient(90deg, #ff7c02 0%, #f02e2e 100%) !important;
+  transition: 0.3s all ease-in-out;
+}
+
+.btn_danger:hover {
+  background: linear-gradient(90deg, #fc2222 0%, #ff7c02 100%) !important;
+  transition: 0.3s all ease-in-out;
 }

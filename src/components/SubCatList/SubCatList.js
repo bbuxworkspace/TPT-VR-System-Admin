@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 import Moment from "react-moment";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./CategoryList.module.scss";
+import { Link } from "react-router-dom";
+import styles from "./SubCatList.module.scss";
 import { connect } from "react-redux";
-import { BsFileEarmarkPlus, BsTrash } from "react-icons/bs";
-import { AiOutlineEdit } from "react-icons/ai";
-import { deleteCategory, getCategoryList } from "../../actions/Category.action";
-import { useModals } from "@mantine/modals";
-import { Text } from "@mantine/core";
-import { toast } from "react-toastify";
+import { BsFileEarmarkPlus } from "react-icons/bs";
+import { AiOutlineDoubleRight } from "react-icons/ai";
+import { getCategoryList } from "../../actions/Category.action";
 
-const CategoryList = ({ categories, getCategoryList, deleteCategory }) => {
+const SubCatList = ({ categories, getCategoryList }) => {
   const [list, setList] = useState(categories === null ? [] : categories);
-  const modals = useModals();
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (categories === null) {
       getCategoryList();
@@ -38,34 +40,6 @@ const CategoryList = ({ categories, getCategoryList, deleteCategory }) => {
       setList(categories);
     }
     setSearchText(text);
-  };
-
-  // DELETE HANDELER
-  const deleteHandeler = (id) =>
-    modals.openConfirmModal({
-      title: "Delete this category",
-      centered: true,
-      children: (
-        <Text size="md">
-          Are you sure you want to delete this category? This action is
-          destructive and you can not undo it.
-        </Text>
-      ),
-      labels: { confirm: "Delete category", cancel: "No don't delete it" },
-      confirmProps: { color: "red" },
-      onCancel: () => {},
-      onConfirm: () => confirmHandeler(id),
-    });
-
-  // On CONFIRM DELETE
-  const confirmHandeler = async (id) => {
-    let check = await deleteCategory(id);
-    if (check === true) {
-      toast.success("Category deleted successfully");
-      navigate("/category");
-    } else {
-      toast.error("Something went wrong");
-    }
   };
 
   return (
@@ -132,17 +106,11 @@ const CategoryList = ({ categories, getCategoryList, deleteCategory }) => {
                       className="d-flex justify-content-center align-items-center"
                     >
                       <Link
-                        to={`/category/${player._id}/edit`}
+                        to={`/category/${player._id}`}
                         className={` fw-bold fs-4 ${styles.link}`}
                       >
-                        <AiOutlineEdit />
+                        <AiOutlineDoubleRight />
                       </Link>
-                      <span
-                        className={`ms-3 fw-bold fs-4 ${styles.link}`}
-                        onClick={() => deleteHandeler(player._id)}
-                      >
-                        <BsTrash className="text-danger" />
-                      </span>
                     </Col>
                   </Row>
                 ))}
@@ -159,6 +127,4 @@ const mapStateToProps = (state) => ({
   categories: state.category.category,
 });
 
-export default connect(mapStateToProps, { getCategoryList, deleteCategory })(
-  CategoryList
-);
+export default connect(mapStateToProps, { getCategoryList })(SubCatList);

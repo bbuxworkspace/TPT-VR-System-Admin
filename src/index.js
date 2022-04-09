@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/Store";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 

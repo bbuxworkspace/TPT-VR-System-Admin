@@ -107,7 +107,7 @@ const Layout = ({ logout, children, title }) => {
               </div>
             </div>
           </Col>
-          <Col md={10}>
+          <Col md={10} className="bg-light">
             <div className="d-flex justify-content-end align-items-center py-3">
               <div
                 className={`${styles.ham}  me-auto`}

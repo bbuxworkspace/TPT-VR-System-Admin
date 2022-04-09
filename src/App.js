@@ -1,6 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
 import { LoginPage, DashboardPage } from "./views";
 import { ToastContainer } from "react-toastify";
 import PrivateOutlet from "./utils/PrivateOutlet";
@@ -17,6 +16,7 @@ import { connect, useDispatch } from "react-redux";
 import { getRefreshToken } from "./actions/Dashboard.action";
 import CategoryPage from "./views/CategoryPage/CategoryPage";
 import AddCategory from "./views/AddCategory/AddCategory";
+import "./App.css";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -38,6 +38,10 @@ function App({ getRefreshToken }) {
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="category" element={<CategoryPage />} />
               <Route path="category/add" element={<AddCategory />} />
+              <Route
+                path="category/:id/edit"
+                element={<AddCategory edit={true} />}
+              />
               <Route path="players" element={<PlayerListPage />} />
               <Route path="players/:id/edit" element={<EditPlayerPage />} />
               <Route path="players/:id" element={<PlayerDetailsPage />} />

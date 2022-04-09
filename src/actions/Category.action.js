@@ -13,6 +13,7 @@ import {
 } from "../constants/Type";
 import { BASE_URL } from "../constants/URL";
 import setAuthToken from "../utils/setAuthToken";
+import { getRefreshToken } from "./Dashboard.action";
 
 //GET Category LIST
 export const getCategoryList = () => async (dispatch) => {
@@ -24,7 +25,12 @@ export const getCategoryList = () => async (dispatch) => {
       payload: res.data.categorys,
     });
   } catch (err) {
-    console.log(err);
+    if (err.response.status === 401) {
+      await dispatch(getRefreshToken());
+      await dispatch(getCategoryList());
+    } else {
+      console.log(err);
+    }
   }
 };
 
@@ -44,25 +50,21 @@ export const getCategoryDetails = (CATEGORYUniqueId) => async (dispatch) => {
       });
     }
   } catch (err) {
-    dispatch({
-      type: GET_CATEGORY_DETAILS_ERROR,
-    });
+    if (err.response.status === 401) {
+      await dispatch(getRefreshToken());
+      await dispatch(getCategoryDetails(CATEGORYUniqueId));
+    } else {
+      dispatch({
+        type: GET_CATEGORY_DETAILS_ERROR,
+      });
+    }
   }
 };
 
 // CREATE Category
-export const createCategory = (values, gameId) => async (dispatch) => {
-  if (localStorage.getItem("token_anbs")) {
-    setAuthToken(localStorage.getItem("token_anbs"));
-  }
+export const createCategory = (values) => async (dispatch) => {
   let formData = {
     name: values.name,
-    gameId: gameId,
-    customGameId: values.customGameId,
-    pictureUrl: values.pictureUrl,
-    addtionalInfo: {
-      test: "test data",
-    },
   };
 
   const config = {
@@ -73,43 +75,34 @@ export const createCategory = (values, gameId) => async (dispatch) => {
   try {
     // TODO ::: API CALL
     const res = await axios.post(
-      `${BASE_URL}/api/CATEGORYCreate`,
+      `${BASE_URL}/api/v1/category`,
       JSON.stringify(formData),
       config
     );
-    if (res.data.code === 200) {
-      dispatch({
-        type: CREATE_CATEGORY,
-      });
-      toast.success("CATEGORY created successfully");
-      dispatch(getCategoryList(gameId));
-      return true;
-    } else {
-      toast.error(res.data.message);
-    }
-    return false;
-  } catch (err) {
     dispatch({
-      type: CREATE_CATEGORY_ERROR,
+      type: CREATE_CATEGORY,
     });
-    console.log(err);
+    toast.success("Category created successfully");
+    dispatch(getCategoryList());
+    return true;
+  } catch (err) {
+    if (err.response.status === 401) {
+      await dispatch(getRefreshToken());
+      await dispatch(createCategory(values));
+    } else {
+      dispatch({
+        type: CREATE_CATEGORY_ERROR,
+      });
+    }
+
     return false;
   }
 };
 
-// CREATE Category
-export const updateCategory = (values, gameId, id) => async (dispatch) => {
-  if (localStorage.getItem("token_anbs")) {
-    setAuthToken(localStorage.getItem("token_anbs"));
-  }
+// Update Category
+export const updateCategory = (values, id) => async (dispatch) => {
   let formData = {
     name: values.name,
-    gameId: gameId,
-    customGameId: values.customGameId,
-    pictureUrl: values.pictureUrl,
-    addtionalInfo: {
-      test: "test data",
-    },
   };
 
   const config = {
@@ -119,53 +112,49 @@ export const updateCategory = (values, gameId, id) => async (dispatch) => {
   };
   try {
     // TODO ::: API CALL
-    const res = await axios.put(
-      `${BASE_URL}/api/CATEGORYUpdate/${id}`,
+    const res = await axios.patch(
+      `${BASE_URL}/api/v1/category/${id}`,
       JSON.stringify(formData),
       config
     );
-    if (res.data.code === 200) {
-      dispatch({
-        type: UPDATE_CATEGORY,
-      });
-      toast.success("CATEGORY updated successfully");
-      dispatch(getCategoryList(gameId));
-      return true;
-    } else {
-      toast.error(res.data.message);
-    }
-    return false;
-  } catch (err) {
     dispatch({
-      type: UPDATE_CATEGORY_ERROR,
+      type: UPDATE_CATEGORY,
     });
-    console.log(err);
+    toast.success("Category updated successfully");
+    dispatch(getCategoryList());
+    return true;
+  } catch (err) {
+    if (err.response.status === 401) {
+      await dispatch(getRefreshToken());
+      await dispatch(updateCategory(values, id));
+    } else {
+      dispatch({
+        type: UPDATE_CATEGORY_ERROR,
+      });
+    }
+
     return false;
   }
 };
 
 //DELETE  Category
-export const deleteCategory = (CATEGORYUniqueId) => async (dispatch) => {
+export const deleteCategory = (id) => async (dispatch) => {
   try {
-    if (localStorage.getItem("token_anbs")) {
-      setAuthToken(localStorage.getItem("token_anbs"));
-    }
-    const res = await axios.delete(
-      `${BASE_URL}/api/deleteCATEGORY?CATEGORYUniqueId=${CATEGORYUniqueId}`
-    );
-    if (res.data.code === 200) {
-      dispatch({
-        type: DELETE_CATEGORY,
-        payload: CATEGORYUniqueId,
-      });
-      return true;
-    } else {
-      return false;
-    }
-  } catch (err) {
+    const res = await axios.delete(`${BASE_URL}/api/v1/category/${id}`);
     dispatch({
-      type: DELETE_CATEGORY_ERROR,
+      type: DELETE_CATEGORY,
+      payload: id,
     });
+    return true;
+  } catch (err) {
+    if (err.response.status === 401) {
+      await dispatch(getRefreshToken());
+      await dispatch(deleteCategory(id));
+    } else {
+      dispatch({
+        type: DELETE_CATEGORY_ERROR,
+      });
+    }
 
     return false;
   }
