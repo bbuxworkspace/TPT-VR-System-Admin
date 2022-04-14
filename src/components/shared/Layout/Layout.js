@@ -57,11 +57,11 @@ const Layout = ({ logout, children, title }) => {
               </NavLink>
             </div>
             <div className={styles.nav}>
-              <NavLink to="/users" className={styles.nav__item}>
+              <NavLink to="/author" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <AiOutlineUser />
                 </span>
-                <span className={styles.nav__item_text}>Dashboard</span>
+                <span className={styles.nav__item_text}>Author</span>
               </NavLink>
             </div>
             <div className={styles.nav}>

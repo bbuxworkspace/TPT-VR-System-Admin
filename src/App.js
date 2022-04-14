@@ -19,6 +19,7 @@ import AddCategory from "./views/AddCategory/AddCategory";
 import "./App.css";
 import SubCategoryPage from "./views/SubCategoryPage/SubCategoryPage";
 import AddSubCategory from "./views/AddSubCategory/AddSubCategory";
+import AuthorPage from "./views/AuthorPage/AuthorPage";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -39,6 +40,7 @@ function App({ getRefreshToken }) {
             <>
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="category" element={<CategoryPage />} />
+              <Route path="author" element={<AuthorPage />} />
               <Route path="category/add" element={<AddCategory />} />
               <Route
                 path="category/:id/edit"
