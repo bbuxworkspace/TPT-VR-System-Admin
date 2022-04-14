@@ -41,7 +41,7 @@ export const getAuthorDetails = (id) => async (dispatch) => {
     const res = await axios.get(`${BASE_URL}/api/v1/author/${id}`);
     dispatch({
       type: GET_AUTHOR_DETAILS,
-      payload: res.data,
+      payload: res.data.author,
     });
   } catch (err) {
     if (err.response.status === 401) {
@@ -86,6 +86,7 @@ export const createAuthor = (values, image) => async (dispatch) => {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
       await dispatch(createAuthor(values, image));
+      return true;
     } else {
       dispatch({
         type: CREATE_AUTHOR_ERROR,
@@ -149,11 +150,13 @@ export const deleteAuthor = (id) => async (dispatch) => {
       type: DELETE_AUTHOR,
       payload: id,
     });
+    dispatch(getAuthorList(1));
     return true;
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
       await dispatch(deleteAuthor(id));
+      return true;
     } else {
       dispatch({
         type: DELETE_AUTHOR_ERROR,

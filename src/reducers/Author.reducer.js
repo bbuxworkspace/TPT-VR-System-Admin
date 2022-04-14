@@ -27,9 +27,10 @@ const authorReducer = (state = initialState, action) => {
         loading: false,
       };
     case DELETE_AUTHOR:
+      console.log("Author deleted");
       return {
         ...state,
-        author: state.author.filter((auth) => auth._id !== payload),
+        author: [...state.author.filter((auth) => auth._id !== payload)],
         loading: false,
       };
     default:

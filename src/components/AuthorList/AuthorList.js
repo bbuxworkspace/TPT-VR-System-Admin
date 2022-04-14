@@ -65,7 +65,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
     if (text !== "") {
       setList({
         ...author,
-        list: author.items.filter((item) => {
+        items: author.items.filter((item) => {
           return item.name.toLowerCase().includes(text.toLowerCase());
         }),
       });
@@ -155,6 +155,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
                         >
                           <div className={styles.img_wrapper}>
                             <img
+                              crossorigin="anonymous"
                               src={`${BASE_URL}/image/small/${authorItem.image}`}
                               alt={authorItem.name}
                               className={styles.img}
@@ -170,7 +171,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
                       </Row>
                     </Col>
                     <Col md={9} className="">
-                      <div className="d-flex align-items-center">
+                      <div className="d-flex align-items-center h-100">
                         <Link
                           to={`/author/${authorItem._id}`}
                           className={` fw-bold ${styles.link}`}
