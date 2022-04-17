@@ -10,13 +10,8 @@ import { logout } from "../../../actions/Dashboard.action";
 import { connect } from "react-redux";
 import { FiLogOut } from "react-icons/fi";
 import { GoThreeBars } from "react-icons/go";
-import { BsPeople } from "react-icons/bs";
-import {
-  AiOutlineUser,
-  AiOutlineUserAdd,
-  AiOutlineUsergroupAdd,
-  AiOutlineHome,
-} from "react-icons/ai";
+import { BiPrinter } from "react-icons/bi";
+import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { CgGames } from "react-icons/cg";
 
 const Layout = ({ logout, children, title }) => {
@@ -65,11 +60,11 @@ const Layout = ({ logout, children, title }) => {
               </NavLink>
             </div>
             <div className={styles.nav}>
-              <NavLink to="/team" className={styles.nav__item}>
+              <NavLink to="/publisher" className={styles.nav__item}>
                 <span className={styles.icon}>
-                  <BsPeople />
+                  <BiPrinter />
                 </span>
-                <span className={styles.nav__item_text}>Teams</span>
+                <span className={styles.nav__item_text}>Publisher</span>
               </NavLink>
             </div>
 
