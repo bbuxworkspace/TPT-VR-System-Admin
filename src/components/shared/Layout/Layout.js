@@ -1,8 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "./Layout.module.scss";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { VscHome } from "react-icons/vsc";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsFolderPlus } from "react-icons/bs";
 import { TiCogOutline } from "react-icons/ti";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -10,9 +9,8 @@ import { logout } from "../../../actions/Dashboard.action";
 import { connect } from "react-redux";
 import { FiLogOut } from "react-icons/fi";
 import { GoThreeBars } from "react-icons/go";
-import { BiPrinter } from "react-icons/bi";
+import { BiPrinter, BiBookBookmark } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
-import { CgGames } from "react-icons/cg";
 
 const Layout = ({ logout, children, title }) => {
   const navigate = useNavigate();
@@ -52,6 +50,14 @@ const Layout = ({ logout, children, title }) => {
               </NavLink>
             </div>
             <div className={styles.nav}>
+              <NavLink to="/books" className={styles.nav__item}>
+                <span className={styles.icon}>
+                  <BiBookBookmark />
+                </span>
+                <span className={styles.nav__item_text}>Books</span>
+              </NavLink>
+            </div>
+            <div className={styles.nav}>
               <NavLink to="/author" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <AiOutlineUser />
@@ -68,14 +74,6 @@ const Layout = ({ logout, children, title }) => {
               </NavLink>
             </div>
 
-            <div className={styles.nav}>
-              <NavLink to="/add-game" className={styles.nav__item}>
-                <span className={styles.icon}>
-                  <CgGames />
-                </span>
-                <span className={styles.nav__item_text}>Add Game</span>
-              </NavLink>
-            </div>
             <div className={styles.nav}>
               <NavLink to="/category" className={styles.nav__item}>
                 <span className={styles.icon}>

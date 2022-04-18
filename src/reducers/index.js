@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import authReducer from "./Auth.reducer";
 import authorReducer from "./Author.reducer";
+import bookReducer from "./Book.reducer";
 import categoryReducer from "./Category.reducer";
 import publisherReducer from "./Publisher.reducer";
 import SubCat from "./SubCat.reducer";
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   subcategory: SubCat,
   author: authorReducer,
   publisher: publisherReducer,
+  book: bookReducer,
 });
 
 export default reducer;
