@@ -24,6 +24,7 @@ import AddAuthorPage from "./views/AddAuthorPage/AddAuthorPage";
 import PublisherPage from "./views/PublisherPage/PublisherPage";
 import AddPublisherPage from "./views/AddPublisherPage/AddPublisherPage";
 import BookPage from "./views/BookPage/BookPage";
+import AddBookPage from "./views/AddBookPage/AddBookPage";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -44,12 +45,14 @@ function App({ getRefreshToken }) {
             <>
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="books" element={<BookPage />} />
+              <Route path="books/add" element={<AddBookPage />} />
               <Route path="category" element={<CategoryPage />} />
               <Route path="author" element={<AuthorPage />} />
               <Route path="publisher" element={<PublisherPage />} />
               <Route path="author/add" element={<AddAuthorPage />} />
               <Route path="publisher/add" element={<AddPublisherPage />} />
               <Route path="author/:id/edit" element={<AddAuthorPage edit />} />
+              <Route path="books/:id/edit" element={<AddBookPage edit />} />
               <Route
                 path="publisher/:id/edit"
                 element={<AddPublisherPage edit />}

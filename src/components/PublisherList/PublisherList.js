@@ -156,7 +156,7 @@ const PublisherList = ({ publisher, getPublisherList, deletePublisher }) => {
                         >
                           <div className={styles.img_wrapper}>
                             <img
-                              crossorigin="anonymous"
+                              crossOrigin="anonymous"
                               src={`${BASE_URL}/image/small/${publisherItem.image}`}
                               alt={publisherItem.name}
                               className={styles.img}
@@ -207,7 +207,7 @@ const PublisherList = ({ publisher, getPublisherList, deletePublisher }) => {
       </Card>
 
       {/* PAGINATION */}
-      {publisher && publisher.pageCount && (
+      {/* {publisher && publisher.pageCount && (
         <Row>
           <Col className={`d-flex justify-content-end align-items-center py-4`}>
             {page !== -1 && (
@@ -263,7 +263,7 @@ const PublisherList = ({ publisher, getPublisherList, deletePublisher }) => {
             )}
           </Col>
         </Row>
-      )}
+      )} */}
     </Container>
   );
 };

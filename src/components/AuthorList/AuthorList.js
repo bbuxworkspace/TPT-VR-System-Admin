@@ -155,7 +155,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
                         >
                           <div className={styles.img_wrapper}>
                             <img
-                              crossorigin="anonymous"
+                              crossOrigin="anonymous"
                               src={`${BASE_URL}/image/small/${authorItem.image}`}
                               alt={authorItem.name}
                               className={styles.img}
@@ -206,7 +206,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
       </Card>
 
       {/* PAGINATION */}
-      {author && (
+      {/* {author && (
         <Row>
           <Col className={`d-flex justify-content-end align-items-center py-4`}>
             {page !== -1 && (
@@ -260,7 +260,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
             )}
           </Col>
         </Row>
-      )}
+      )} */}
     </Container>
   );
 };

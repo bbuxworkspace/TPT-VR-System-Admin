@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import Moment from "react-moment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./BookList.module.scss";
 import { connect } from "react-redux";
@@ -10,7 +9,6 @@ import { useModals } from "@mantine/modals";
 import { Text } from "@mantine/core";
 import { toast } from "react-toastify";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
-import { deleteAuthor, getAuthorList } from "../../actions/Author.action";
 import { BASE_URL } from "../../constants/URL";
 import { deletebook, getBookList } from "../../actions/Book.action";
 
@@ -42,7 +40,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
     for (let i = 1; i <= totalPage; i++) {
       pages.push(
         <Link
-          to={`/book?page=${parseInt(i)}`}
+          to={`/books?page=${parseInt(i)}`}
           key={i}
           className={`${styles.link} ${
             (!parsed.page && i == 1) || parsed.page == i
@@ -98,7 +96,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
     let check = await deletebook(id);
     if (check === true) {
       toast.success("book deleted successfully");
-      navigate("/book");
+      navigate("/books");
     } else {
       toast.error("Something went wrong");
     }
@@ -118,7 +116,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
           />
         </div>
         <div className="">
-          <Link to="/book/add" className={styles.add}>
+          <Link to="/books/add" className={styles.add}>
             <BsFileEarmarkPlus />
           </Link>
         </div>
@@ -156,7 +154,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
                         >
                           <div className={styles.img_wrapper}>
                             <img
-                              crossorigin="anonymous"
+                              crossOrigin="anonymous"
                               src={`${BASE_URL}/image/small/${bookItem.image}`}
                               alt={bookItem.name}
                               className={styles.img}
@@ -174,7 +172,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
                     <Col md={9} className="">
                       <div className="d-flex align-items-center h-100">
                         <Link
-                          to={`/book/${bookItem._id}`}
+                          to={`/books/${bookItem._id}`}
                           className={` fw-bold ${styles.link}`}
                         >
                           {bookItem.name}
@@ -187,7 +185,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
                       className="d-flex justify-content-center align-items-center"
                     >
                       <Link
-                        to={`/book/${bookItem._id}/edit`}
+                        to={`/books/${bookItem._id}/edit`}
                         className={` fw-bold fs-4 ${styles.link}`}
                       >
                         <AiOutlineEdit />
@@ -214,7 +212,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
               <div className="d-flex justify-content-end align-items-center">
                 {parsed.page > 1 ? (
                   <Link
-                    to={`/book?page=${parseInt(parsed.page) - 1}`}
+                    to={`/books?page=${parseInt(parsed.page) - 1}`}
                     className={`${styles.link} ${
                       parsed.page === 1 ? styles.disabled : ""
                     } ${styles.link_arrow}`}
@@ -237,7 +235,7 @@ const BookList = ({ book, getBookList, deletebook }) => {
                   : null}
                 {page < book.pageCount ? (
                   <Link
-                    to={`/book?page=${parseInt(parsed.page) + 1}`}
+                    to={`/books?page=${parseInt(parsed.page) + 1}`}
                     className={`${styles.link} ${styles.link_arrow} ${
                       styles.link_arrow
                     } ${parsed.page >= book.pageCount ? styles.disabled : ""}`}
