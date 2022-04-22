@@ -22,7 +22,7 @@ export const getCategoryList = () => async (dispatch) => {
       payload: res.data.categorys,
     });
   } catch (err) {
-    if (err.response.status === 401) {
+    if (err.response && err.response.status === 401) {
       await dispatch(getRefreshToken());
       await dispatch(getCategoryList());
     } else {
@@ -56,7 +56,7 @@ export const createCategory = (values) => async (dispatch) => {
     dispatch(getCategoryList());
     return true;
   } catch (err) {
-    if (err.response.status === 401) {
+    if (err.response && err.response.status === 401) {
       await dispatch(getRefreshToken());
       await dispatch(createCategory(values));
     } else {
@@ -94,7 +94,7 @@ export const updateCategory = (values, id) => async (dispatch) => {
     dispatch(getCategoryList());
     return true;
   } catch (err) {
-    if (err.response.status === 401) {
+    if (err.response && err.response.status === 401) {
       await dispatch(getRefreshToken());
       await dispatch(updateCategory(values, id));
     } else {
@@ -117,7 +117,7 @@ export const deleteCategory = (id) => async (dispatch) => {
     });
     return true;
   } catch (err) {
-    if (err.response.status === 401) {
+    if (err.response && err.response.status === 401) {
       await dispatch(getRefreshToken());
       await dispatch(deleteCategory(id));
     } else {
