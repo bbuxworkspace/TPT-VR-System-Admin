@@ -61,14 +61,18 @@ const AddBookForm = ({
     if (selectedCategory !== "" && subcategory === null) {
       getSubCategoryList(selectedCategory);
     }
+    if (data && data.categoryId) {
+      setSelectedCategory(data.categoryId);
+      getSubCategoryList(data.categoryId);
+    }
   };
 
   const onSubmitHandeler = async (values) => {
     setIsLoading(true);
     let check =
       update === true
-        ? await updatebook(values, BookImage, data._id)
-        : await createbook(values, BookImage);
+        ? await updatebook(values, BookImage, AudioFile, PdfFile, data._id)
+        : await createbook(values, BookImage, AudioFile, PdfFile);
     if (check === true) {
       setTimeout(() => {
         setIsLoading(false);
@@ -109,12 +113,13 @@ const AddBookForm = ({
   const onSelectFilePdf = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setPdfFile(undefined);
+
       return;
     }
-    // if (e.target.files[0].size > 2000000) {
-    //   toast.error("File size must be less than 2MB");
-    //   return;
-    // }
+    if (e.target.files[0].type !== "application/pdf") {
+      toast.error("File must be in PDF format");
+      return;
+    }
     // console.log(e.target.files[0]);
     setPdfFile(e.target.files[0]);
   };
@@ -127,10 +132,10 @@ const AddBookForm = ({
     year: data && data.year ? data.year : "",
     description: data && data.description ? data.description : "",
     edition: data && data.edition ? data.edition : "",
-    publisher: data && data.publisher ? data.publisher : "",
-    author: data && data.author ? data.author : "",
-    category: data && data.category ? data.category : "",
-    subcategory: data && data.subcategory ? data.subcategory : "",
+    publisher: data && data.publisherId ? data.publisherId : "",
+    author: data && data.writerId ? data.writerId : "",
+    category: data && data.categoryId ? data.categoryId : "",
+    subcategory: data && data.subCategoryId ? data.subCategoryId : "",
   };
 
   const SignupSchema = Yup.object().shape({
@@ -164,7 +169,7 @@ const AddBookForm = ({
             <Formik
               initialValues={initVals}
               validationSchema={SignupSchema}
-              enableReinitialize
+              enableReinitialize={true}
               onSubmit={(values) => onSubmitHandeler(values)}
             >
               {({ errors, touched, values, setFieldValue }) => (
@@ -197,14 +202,18 @@ const AddBookForm = ({
                       </label>
                       <Select
                         placeholder="Pick one publisher..."
-                        data={publisher.items.map((item) => {
-                          return { value: item._id, label: item.name };
-                        })}
+                        data={
+                          publisher &&
+                          publisher.items.map((item) => {
+                            return { value: item._id, label: item.name };
+                          })
+                        }
                         id="publisher"
                         value={values.publisher}
                         onChange={(e) => {
                           setFieldValue("publisher", e);
                         }}
+                        defaultValue={values.publisher}
                         searchable={true}
                         error={
                           errors.publisher && touched.publisher
@@ -219,10 +228,14 @@ const AddBookForm = ({
                       </label>
                       <Select
                         placeholder="Pick one author..."
-                        data={author.items.map((item) => {
-                          return { value: item._id, label: item.name };
-                        })}
+                        data={
+                          author &&
+                          author.items.map((item) => {
+                            return { value: item._id, label: item.name };
+                          })
+                        }
                         id="author"
+                        defaultValue={values.author}
                         value={values.author}
                         onChange={(e) => {
                           setFieldValue("author", e);
@@ -242,9 +255,12 @@ const AddBookForm = ({
                         </label>
                         <Select
                           placeholder="Pick one category..."
-                          data={category.map((item) => {
-                            return { value: item._id, label: item.name };
-                          })}
+                          data={
+                            category &&
+                            category.map((item) => {
+                              return { value: item._id, label: item.name };
+                            })
+                          }
                           id="category"
                           value={values.category}
                           onChange={(e) => {
@@ -272,6 +288,7 @@ const AddBookForm = ({
                             return { value: item._id, label: item.name };
                           })}
                           id="subcategory"
+                          defaultValue={values.subcategory}
                           value={values.subcategory}
                           onChange={(e) => {
                             setFieldValue("subcategory", e);

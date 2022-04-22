@@ -15,11 +15,9 @@ import { BASE_URL } from "../constants/URL";
 import { getRefreshToken } from "./Dashboard.action";
 
 //GET book LIST
-export const getBookList = (page) => async (dispatch) => {
+export const getBookList = () => async (dispatch) => {
   try {
-    const res = await axios.get(
-      `${BASE_URL}/api/v1/book?page=${page}&limit=100`
-    );
+    const res = await axios.get(`${BASE_URL}/api/v1/book`);
 
     dispatch({
       type: GET_BOOK_LIST,
@@ -28,7 +26,7 @@ export const getBookList = (page) => async (dispatch) => {
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
-      await dispatch(getBookList(page));
+      await dispatch(getBookList());
     } else {
       console.log(err);
     }
@@ -57,45 +55,58 @@ export const getBookDetails = (id) => async (dispatch) => {
 };
 
 // CREATE book
-export const createbook = (values, image) => async (dispatch) => {
-  const formData = new FormData();
-  formData.append("name", values.name);
-  formData.append("birth", values.birth);
-  formData.append("death", values.death);
-  formData.append("location", values.location);
-  formData.append("description", values.description);
+export const createbook =
+  (values, image, AudioFile, PdfFile) => async (dispatch) => {
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("year", values.year);
+    formData.append("edition", values.edition);
+    formData.append("publisherId", values.publisher);
+    formData.append("writerId", values.author);
+    formData.append("categoryId", values.category);
+    formData.append("subCategoryId", values.subcategory);
+    formData.append("price", values.price);
+    formData.append("page", values.page);
+    formData.append("isbn", values.isbn);
+    formData.append("description", values.description);
 
-  if (image) {
-    formData.append("image", image);
-  }
-  const config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  };
-  try {
-    // TODO ::: API CALL
-    const res = await axios.post(`${BASE_URL}/api/v1/book`, formData, config);
-    dispatch({
-      type: CREATE_BOOK,
-    });
-    toast.success("book created successfully");
-    dispatch(getBookList(1));
-    return true;
-  } catch (err) {
-    if (err.response.status === 401) {
-      await dispatch(getRefreshToken());
-      await dispatch(createbook(values, image));
-      return true;
-    } else {
-      dispatch({
-        type: CREATE_BOOK_ERROR,
-      });
+    if (image) {
+      formData.append("image", image);
     }
+    if (image) {
+      formData.append("pdfFile", AudioFile);
+    }
+    if (image) {
+      formData.append("audioFile", PdfFile);
+    }
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    try {
+      // TODO ::: API CALL
+      const res = await axios.post(`${BASE_URL}/api/v1/book`, formData, config);
+      dispatch({
+        type: CREATE_BOOK,
+      });
+      toast.success("book created successfully");
+      dispatch(getBookList());
+      return true;
+    } catch (err) {
+      if (err.response.status === 401) {
+        await dispatch(getRefreshToken());
+        await dispatch(createbook(values, image));
+        return true;
+      } else {
+        dispatch({
+          type: CREATE_BOOK_ERROR,
+        });
+      }
 
-    return false;
-  }
-};
+      return false;
+    }
+  };
 
 // Update book
 export const updatebook = (values, image, id) => async (dispatch) => {
@@ -126,7 +137,7 @@ export const updatebook = (values, image, id) => async (dispatch) => {
       type: UPDATE_BOOK,
     });
     toast.success("book updated successfully");
-    dispatch(getBookList(1));
+    dispatch(getBookList());
     return true;
   } catch (err) {
     if (err.response.status === 401) {

@@ -17,9 +17,7 @@ import { getRefreshToken } from "./Dashboard.action";
 //GET Publisher LIST
 export const getPublisherList = (page) => async (dispatch) => {
   try {
-    const res = await axios.get(
-      `${BASE_URL}/api/v1/publisher?page=${page}&limit=9999999`
-    );
+    const res = await axios.get(`${BASE_URL}/api/v1/publisher`);
 
     dispatch({
       type: GET_PUBLISHER_LIST,
