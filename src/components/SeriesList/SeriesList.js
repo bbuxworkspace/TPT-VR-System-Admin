@@ -27,7 +27,7 @@ const SeriesList = ({ series, getSeriesList, deleteSeries }) => {
       page = parsed.page;
     }
     if (series === null) {
-      getSeriesList(page);
+      getSeriesList();
     }
     if (series !== null) {
       setList(series);
@@ -191,7 +191,7 @@ const SeriesList = ({ series, getSeriesList, deleteSeries }) => {
       </Card>
 
       {/* PAGINATION */}
-      {series && (
+      {/* {series && (
         <Row>
           <Col className={`d-flex justify-content-end align-items-center py-4`}>
             {page !== -1 && (
@@ -245,7 +245,7 @@ const SeriesList = ({ series, getSeriesList, deleteSeries }) => {
             )}
           </Col>
         </Row>
-      )}
+      )} */}
     </Container>
   );
 };

@@ -15,11 +15,9 @@ import { BASE_URL } from "../constants/URL";
 import { getRefreshToken } from "./Dashboard.action";
 
 //GET Series LIST
-export const getSeriesList = (page) => async (dispatch) => {
+export const getSeriesList = () => async (dispatch) => {
   try {
-    const res = await axios.get(
-      `${BASE_URL}/api/v1/series?page=${page}&limit=10000`
-    );
+    const res = await axios.get(`${BASE_URL}/api/v1/series`);
 
     dispatch({
       type: GET_SERIES_LIST,
@@ -64,7 +62,7 @@ export const createSeries = (values, books) => async (dispatch) => {
   }
   const formData = {
     name: values.name,
-    books: books.map((book) => book._id),
+    books: books,
   };
 
   const config = {
