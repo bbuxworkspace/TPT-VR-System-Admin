@@ -11,6 +11,7 @@ import { FiLogOut } from "react-icons/fi";
 import { GoThreeBars } from "react-icons/go";
 import { BiPrinter, BiBookBookmark } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
+import { MdOutlineCollectionsBookmark } from "react-icons/md";
 
 const Layout = ({ logout, children, title }) => {
   const navigate = useNavigate();
@@ -55,6 +56,14 @@ const Layout = ({ logout, children, title }) => {
                   <BiBookBookmark />
                 </span>
                 <span className={styles.nav__item_text}>Books</span>
+              </NavLink>
+            </div>
+            <div className={styles.nav}>
+              <NavLink to="/series" className={styles.nav__item}>
+                <span className={styles.icon}>
+                  <MdOutlineCollectionsBookmark />
+                </span>
+                <span className={styles.nav__item_text}>Series</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
