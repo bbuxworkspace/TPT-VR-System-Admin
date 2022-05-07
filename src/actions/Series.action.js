@@ -57,62 +57,48 @@ export const getSeriesDetails = (id) => async (dispatch) => {
 };
 
 // CREATE Series
-export const createSeries =
-  (values, image, AudioFile, PdfFile) => async (dispatch) => {
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("year", values.year);
-    formData.append("edition", values.edition);
-    formData.append("publisherId", values.publisher);
-    formData.append("writerId", values.author);
-    formData.append("categoryId", values.category);
-    formData.append("subCategoryId", values.subcategory);
-    formData.append("price", values.price);
-    formData.append("page", values.page);
-    formData.append("isbn", values.isbn);
-    formData.append("description", values.description);
-
-    if (image) {
-      formData.append("image", image);
-    }
-    if (image) {
-      formData.append("pdfFile", AudioFile);
-    }
-    if (image) {
-      formData.append("audioFile", PdfFile);
-    }
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
-    try {
-      // TODO ::: API CALL
-      const res = await axios.post(
-        `${BASE_URL}/api/v1/series`,
-        formData,
-        config
-      );
-      dispatch({
-        type: CREATE_SERIES,
-      });
-      toast.success("Series created successfully");
-      dispatch(getSeriesList());
-      return true;
-    } catch (err) {
-      if (err.response.status === 401) {
-        await dispatch(getRefreshToken());
-        await dispatch(createSeries(values, image));
-        return true;
-      } else {
-        dispatch({
-          type: CREATE_SERIES_ERROR,
-        });
-      }
-
-      return false;
-    }
+export const createSeries = (values, books) => async (dispatch) => {
+  if (books && books.length === 0) {
+    toast.error("Please add at least one book");
+    return false;
+  }
+  const formData = {
+    name: values.name,
+    books: books.map((book) => book._id),
   };
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    // TODO ::: API CALL
+    const res = await axios.post(
+      `${BASE_URL}/api/v1/series`,
+      JSON.stringify(formData),
+      config
+    );
+    dispatch({
+      type: CREATE_SERIES,
+    });
+    toast.success("Series created successfully");
+    dispatch(getSeriesList());
+    return true;
+  } catch (err) {
+    if (err.response.status === 401) {
+      await dispatch(getRefreshToken());
+      await dispatch(createSeries(values, books));
+      return true;
+    } else {
+      dispatch({
+        type: CREATE_SERIES_ERROR,
+      });
+    }
+
+    return false;
+  }
+};
 
 // Update Series
 export const updateSeries = (values, image, id) => async (dispatch) => {

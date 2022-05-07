@@ -123,7 +123,7 @@ export const getProfileData = () => async (dispatch) => {
     const res = await axios.get(`${BASE_URL}/api/v1/profile/`, {
       withCredentials: true,
     });
-    console.log(res);
+    // console.log(res);
     //if (refreshRes.status === 200) {
     dispatch({
       type: AUTH_USER_LOAD,

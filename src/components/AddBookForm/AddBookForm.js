@@ -229,10 +229,11 @@ const AddBookForm = ({
                       <Select
                         placeholder="Pick one author..."
                         data={
-                          author &&
-                          author.items.map((item) => {
-                            return { value: item._id, label: item.name };
-                          })
+                          author !== null
+                            ? author.items.map((item) => {
+                                return { value: item._id, label: item.name };
+                              })
+                            : null
                         }
                         id="author"
                         defaultValue={values.author}
@@ -256,10 +257,11 @@ const AddBookForm = ({
                         <Select
                           placeholder="Pick one category..."
                           data={
-                            category &&
-                            category.map((item) => {
-                              return { value: item._id, label: item.name };
-                            })
+                            category !== null
+                              ? category.map((item) => {
+                                  return { value: item._id, label: item.name };
+                                })
+                              : null
                           }
                           id="category"
                           value={values.category}
