@@ -12,7 +12,6 @@ import * as Yup from "yup";
 import styles from "./AddSeriesForm.module.scss";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
 import { createSeries, updateSeries } from "../../actions/Series.action";
 import { getBookList } from "../../actions/Book.action";
 import { BASE_URL } from "../../constants/URL";
@@ -27,7 +26,9 @@ const AddSeriesForm = ({
   getBookList,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState(
+    data ? data.books.map((item) => item._id) : []
+  );
   const navigate = useNavigate();
   useEffect(() => {
     if (bookData === null) {

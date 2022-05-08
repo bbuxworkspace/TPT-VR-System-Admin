@@ -8,14 +8,14 @@ import { getSeriesDetails } from "../../actions/Series.action";
 import { BASE_URL } from "../../constants/URL";
 
 const SeriesDetails = ({ series, getSeriesDetails, id }) => {
-  const [list, setList] = useState(series === null ? [] : series);
+  const [list, setList] = useState(series === null ? [] : series.books);
 
   useEffect(() => {
     if (series === null) {
       getSeriesDetails(id);
     }
     if (series !== null) {
-      setList(series);
+      setList(series.books);
     }
   }, [series]);
 
@@ -24,12 +24,12 @@ const SeriesDetails = ({ series, getSeriesDetails, id }) => {
   const searchHandeler = (text) => {
     if (text !== "") {
       setList(
-        series.filter((item) => {
+        series.books.filter((item) => {
           return item.name.toLowerCase().includes(text.toLowerCase());
         })
       );
     } else {
-      setList(series);
+      setList(series.books);
     }
     setSearchText(text);
   };

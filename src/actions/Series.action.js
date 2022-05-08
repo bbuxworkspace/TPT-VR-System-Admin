@@ -39,7 +39,7 @@ export const getSeriesDetails = (id) => async (dispatch) => {
     const res = await axios.get(`${BASE_URL}/api/v1/series/${id}`);
     dispatch({
       type: GET_SERIES_DETAILS,
-      payload: res.data.series.books,
+      payload: res.data.series,
     });
   } catch (err) {
     if (err.response.status === 401) {
@@ -99,21 +99,19 @@ export const createSeries = (values, books) => async (dispatch) => {
 };
 
 // Update Series
-export const updateSeries = (values, image, id) => async (dispatch) => {
-  const formData = new FormData();
-  formData.append("name", values.name);
-  formData.append("birth", values.birth);
-  formData.append("death", values.death);
-  formData.append("location", values.location);
-  formData.append("description", values.description);
-
-  if (image) {
-    formData.append("image", image);
+export const updateSeries = (values, books, id) => async (dispatch) => {
+  if (books && books.length === 0) {
+    toast.error("Please add at least one book");
+    return false;
   }
+  const formData = {
+    name: values.name,
+    books: books,
+  };
 
   const config = {
     headers: {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "application/json",
     },
   };
   try {
@@ -132,7 +130,7 @@ export const updateSeries = (values, image, id) => async (dispatch) => {
   } catch (err) {
     if (err.response.status === 401) {
       await dispatch(getRefreshToken());
-      await dispatch(updateSeries(values, image, id));
+      await dispatch(updateSeries(values, books, id));
     } else {
       dispatch({
         type: UPDATE_SERIES_ERROR,

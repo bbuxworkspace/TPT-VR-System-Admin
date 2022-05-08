@@ -70,6 +70,10 @@ function App({ getRefreshToken }) {
               <Route path="category/:catId" element={<SubCategoryPage />} />
               <Route path="series/:id" element={<SeriesDetailsPage />} />
               <Route
+                path="series/:id/edit"
+                element={<AddSeriesPage edit={true} />}
+              />
+              <Route
                 path="subcategory/add/:catId"
                 element={<AddSubCategory />}
               />
