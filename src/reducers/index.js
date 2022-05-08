@@ -4,7 +4,7 @@ import authorReducer from "./Author.reducer";
 import bookReducer from "./Book.reducer";
 import categoryReducer from "./Category.reducer";
 import publisherReducer from "./Publisher.reducer";
-import seriesReducer from "./Series.reducer copy";
+import seriesReducer from "./Series.reducer";
 import SubCat from "./SubCat.reducer";
 
 const reducer = combineReducers({

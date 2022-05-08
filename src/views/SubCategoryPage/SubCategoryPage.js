@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/shared/Layout/Layout";
 import { SubCategoryList } from "../../components/SubCategoryList";
+import { getCategoryList } from "../../actions/Category.action";
 
-const SubCategoryPage = ({ categories }) => {
+const SubCategoryPage = ({ categories, getCategoryList }) => {
   const { catId } = useParams();
+  useEffect(() => {
+    if (categories === null) {
+      getCategoryList();
+    }
+  }, []);
   return (
     <Layout
       title={
-        categories && categories.filter((item) => item._id === catId)[0].name
+        categories !== null
+          ? categories.filter((item) => item._id === catId)[0].name
+          : "Loading..."
       }
     >
       <SubCategoryList id={catId} />
@@ -21,4 +29,4 @@ const mapStateToProps = (state) => ({
   categories: state.category.category,
 });
 
-export default connect(mapStateToProps, null)(SubCategoryPage);
+export default connect(mapStateToProps, { getCategoryList })(SubCategoryPage);

@@ -39,7 +39,7 @@ export const getSeriesDetails = (id) => async (dispatch) => {
     const res = await axios.get(`${BASE_URL}/api/v1/series/${id}`);
     dispatch({
       type: GET_SERIES_DETAILS,
-      payload: res.data.book,
+      payload: res.data.series.books,
     });
   } catch (err) {
     if (err.response.status === 401) {

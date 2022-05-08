@@ -27,6 +27,7 @@ import BookPage from "./views/BookPage/BookPage";
 import AddBookPage from "./views/AddBookPage/AddBookPage";
 import SeriesPage from "./views/SeriesPage/SeriesPage";
 import AddSeriesPage from "./views/AddSeriesPage/AddSeriesPage";
+import SeriesDetailsPage from "./views/SeriesDetailsPage/SeriesDetailsPage";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -67,6 +68,7 @@ function App({ getRefreshToken }) {
                 element={<AddCategory edit={true} />}
               />
               <Route path="category/:catId" element={<SubCategoryPage />} />
+              <Route path="series/:id" element={<SeriesDetailsPage />} />
               <Route
                 path="subcategory/add/:catId"
                 element={<AddSubCategory />}
