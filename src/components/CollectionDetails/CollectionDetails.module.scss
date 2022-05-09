@@ -50,6 +50,7 @@
 }
 
 .add:hover {
+  cursor: pointer;
   color: var(--primary);
   transition: 0.3s all ease-in-out;
 }

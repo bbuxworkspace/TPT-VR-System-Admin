@@ -45,7 +45,11 @@ export const addBookToCollection = (values, id) => async (dispatch) => {
   };
   try {
     // TODO ::: API CALL
-    await axios.put(`${BASE_URL}/api/v1/collection/${id}`, formData, config);
+    await axios.put(
+      `${BASE_URL}/api/v1/collection/${id}`,
+      JSON.stringify(formData),
+      config
+    );
     dispatch({
       type: ADD_INTO_COLLECTION,
     });
@@ -79,7 +83,11 @@ export const removeBookToCollection = (values, id) => async (dispatch) => {
   };
   try {
     // TODO ::: API CALL
-    await axios.patch(`${BASE_URL}/api/v1/collection/${id}`, formData, config);
+    await axios.patch(
+      `${BASE_URL}/api/v1/collection/${id}`,
+      JSON.stringify(formData),
+      config
+    );
     dispatch({
       type: REMOVE_FROM_COLLECTION,
     });

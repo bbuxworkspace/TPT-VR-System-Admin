@@ -1,24 +1,104 @@
-import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Row,
+  Spinner,
+  Button,
+} from "react-bootstrap";
 import styles from "./CollectionDetails.module.scss";
 import { connect } from "react-redux";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineFileAdd } from "react-icons/ai";
 import { BASE_URL } from "../../constants/URL";
-import { getCollectionDetails } from "../../actions/Collection.action";
+import {
+  addBookToCollection,
+  getCollectionDetails,
+  removeBookToCollection,
+} from "../../actions/Collection.action";
+import { useModals } from "@mantine/modals";
+import { getBookList } from "../../actions/Book.action";
+import { Select, Text } from "@mantine/core";
+import { BsTrash } from "react-icons/bs";
 
-const CollectionDetails = ({ collection, getCollectionDetails, id }) => {
+const CollectionDetails = ({
+  book,
+  collection,
+  getCollectionDetails,
+  id,
+  addBookToCollection,
+  removeBookToCollection,
+}) => {
   useEffect(() => {
     getCollectionDetails(id);
+    if (book === null) {
+      getBookList();
+    }
   }, [id]);
+  const modals = useModals();
+
+  const newHandeler = () => {
+    modals.openModal({
+      title: "Add Book",
+      closeOnClickOutside: false,
+      centered: true,
+      children: (
+        <>
+          <form onSubmit={handelAddToCollection}>
+            <FormGroup className="mb-3">
+              <Form.Label>Search the book you want to add...</Form.Label>
+              <Select
+                placeholder="Book Name..."
+                searchable
+                nothingFound="Not Found..."
+                data={book.items.map((item) => ({
+                  value: item._id,
+                  label: item.name,
+                }))}
+              />
+            </FormGroup>
+            <Button type="submit" className="btn_primary">
+              Submit
+            </Button>
+          </form>
+        </>
+      ),
+    });
+  };
+
+  const handelAddToCollection = async (e) => {
+    e.preventDefault();
+    let bookInput = e.target.elements[0].value;
+    await addBookToCollection(bookInput, id);
+
+    modals.closeAll();
+  };
+
+  const deleteHandeler = (bookIdToRemove) => {
+    modals.openConfirmModal({
+      title: `Remove this book from collection`,
+      centered: true,
+      children: (
+        <Text size="md">
+          Are you sure you want to remove this book from collection?
+        </Text>
+      ),
+      labels: { confirm: "Remove book", cancel: "No don't remove it" },
+      confirmProps: { color: "red" },
+      onCancel: () => {},
+      onConfirm: () => removeBookToCollection(bookIdToRemove, id),
+    });
+  };
 
   return (
     <Container className="pb-4">
       <div className="d-flex justify-content-end align-items-center pb-3 ">
         <div className="text-right">
-          <Link to={`/collection/${id}/edit`} className={styles.add}>
-            <AiOutlineEdit />
-          </Link>
+          <span className={styles.add} onClick={() => newHandeler()}>
+            <AiOutlineFileAdd />
+          </span>
         </div>
       </div>
       <Card className="crd p-md-4 pb-md-0 p-2">
@@ -68,10 +148,21 @@ const CollectionDetails = ({ collection, getCollectionDetails, id }) => {
                         </Col>
                       </Row>
                     </Col>
-                    <Col md={10} className="">
+                    <Col md={9} className="">
                       <div className="d-flex align-items-center h-100">
                         <span className={` fw-bold`}>{bookItem.name}</span>
                       </div>
+                    </Col>
+                    <Col
+                      md={1}
+                      className="d-flex justify-content-center align-items-center"
+                    >
+                      <span
+                        className={`ms-3 fw-bold fs-4 ${styles.link}`}
+                        onClick={() => deleteHandeler(bookItem._id)}
+                      >
+                        <BsTrash className="text-danger" />
+                      </span>
                     </Col>
                   </Row>
                 ))}
@@ -85,8 +176,11 @@ const CollectionDetails = ({ collection, getCollectionDetails, id }) => {
 
 const mapStateToProps = (state) => ({
   collection: state.collection.collection,
+  book: state.book.book,
 });
 
 export default connect(mapStateToProps, {
   getCollectionDetails,
+  addBookToCollection,
+  removeBookToCollection,
 })(CollectionDetails);
