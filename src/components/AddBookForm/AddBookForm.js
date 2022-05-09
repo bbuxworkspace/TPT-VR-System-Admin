@@ -191,6 +191,7 @@ const AddBookForm = ({
                       name="name"
                       isValid={!errors.name && touched.name}
                       type="text"
+                      autoComplete="off"
                       className={`${styles.input} w-100`}
                       isInvalid={errors.name && touched.name}
                     />
@@ -209,6 +210,7 @@ const AddBookForm = ({
                           })
                         }
                         id="publisher"
+                        autoComplete="off"
                         value={values.publisher}
                         onChange={(e) => {
                           setFieldValue("publisher", e);
@@ -238,6 +240,7 @@ const AddBookForm = ({
                         id="author"
                         defaultValue={values.author}
                         value={values.author}
+                        autoComplete="off"
                         onChange={(e) => {
                           setFieldValue("author", e);
                         }}
@@ -265,6 +268,7 @@ const AddBookForm = ({
                           }
                           id="category"
                           value={values.category}
+                          autoComplete="off"
                           onChange={(e) => {
                             setFieldValue("category", e);
                             setSelectedCategory(e);
@@ -286,6 +290,7 @@ const AddBookForm = ({
                         </label>
                         <Select
                           placeholder="Pick one subcategory..."
+                          autoComplete="off"
                           data={subcategory.map((item) => {
                             return { value: item._id, label: item.name };
                           })}
@@ -490,11 +495,7 @@ const AddBookForm = ({
                       className="btn_primary"
                       disabled={isLoading}
                     >
-                      {isLoading
-                        ? "Loading..."
-                        : update
-                        ? "Save"
-                        : "Add Author"}
+                      {isLoading ? "Loading..." : update ? "Save" : "Add Book"}
                     </Button>
                   </div>
                 </Form>

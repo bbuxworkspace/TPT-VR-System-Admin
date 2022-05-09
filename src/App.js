@@ -12,7 +12,7 @@ import TeamDetailsPage from "./views/TeamDetailsPage/TeamDetailsPage";
 import AddTeamPage from "./views/AddTeamPage/AddTeamPage";
 import EditTeamPage from "./views/EditTeamPage/EditTeamPage";
 import EditPlayerPage from "./views/EditPlayerPage/EditPlayerPage";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { getRefreshToken } from "./actions/Dashboard.action";
 import CategoryPage from "./views/CategoryPage/CategoryPage";
 import AddCategory from "./views/AddCategory/AddCategory";
@@ -28,6 +28,8 @@ import AddBookPage from "./views/AddBookPage/AddBookPage";
 import SeriesPage from "./views/SeriesPage/SeriesPage";
 import AddSeriesPage from "./views/AddSeriesPage/AddSeriesPage";
 import SeriesDetailsPage from "./views/SeriesDetailsPage/SeriesDetailsPage";
+import CollectionPage from "./views/CollectionPage/CollectionPage";
+import CollectionDetailsPage from "./views/CollectionDetailsPage/CollectionDetailsPage";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -50,7 +52,8 @@ function App({ getRefreshToken }) {
               <Route path="books" element={<BookPage />} />
               <Route path="books/add" element={<AddBookPage />} />
               <Route path="category" element={<CategoryPage />} />
-              <Route path="series/" element={<SeriesPage />} />
+              <Route path="collection" element={<CollectionPage />} />
+              <Route path="series" element={<SeriesPage />} />
               <Route path="author" element={<AuthorPage />} />
               <Route path="publisher" element={<PublisherPage />} />
               <Route path="author/add" element={<AddAuthorPage />} />
@@ -69,6 +72,10 @@ function App({ getRefreshToken }) {
               />
               <Route path="category/:catId" element={<SubCategoryPage />} />
               <Route path="series/:id" element={<SeriesDetailsPage />} />
+              <Route
+                path="collection/:id"
+                element={<CollectionDetailsPage />}
+              />
               <Route
                 path="series/:id/edit"
                 element={<AddSeriesPage edit={true} />}

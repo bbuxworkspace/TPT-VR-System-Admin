@@ -12,6 +12,7 @@ import { GoThreeBars } from "react-icons/go";
 import { BiPrinter, BiBookBookmark } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { MdOutlineCollectionsBookmark } from "react-icons/md";
+import { ImStack } from "react-icons/im";
 
 const Layout = ({ logout, children, title }) => {
   const navigate = useNavigate();
@@ -56,6 +57,14 @@ const Layout = ({ logout, children, title }) => {
                   <BiBookBookmark />
                 </span>
                 <span className={styles.nav__item_text}>Books</span>
+              </NavLink>
+            </div>
+            <div className={styles.nav}>
+              <NavLink to="/collection" className={styles.nav__item}>
+                <span className={styles.icon}>
+                  <ImStack />
+                </span>
+                <span className={styles.nav__item_text}>Collection</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
