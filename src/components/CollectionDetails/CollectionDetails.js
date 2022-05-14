@@ -30,6 +30,7 @@ const CollectionDetails = ({
   id,
   addBookToCollection,
   removeBookToCollection,
+  getBookList,
 }) => {
   useEffect(() => {
     getCollectionDetails(id);
@@ -183,4 +184,5 @@ export default connect(mapStateToProps, {
   getCollectionDetails,
   addBookToCollection,
   removeBookToCollection,
+  getBookList,
 })(CollectionDetails);
