@@ -56,5 +56,6 @@
   },
   "devDependencies": {
     "@redux-devtools/extension": "^3.2.2"
-  }
+  },
+  "proxy":"https://boimelafoundation.com/"
 }

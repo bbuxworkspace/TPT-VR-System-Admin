@@ -43,14 +43,14 @@ const Layout = ({ logout, children, title }) => {
               </div>
             </div>
 
-            <div className={styles.nav}>
+            {/* <div className={styles.nav}>
               <NavLink to="/dashboard" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <AiOutlineHome />
                 </span>
                 <span className={styles.nav__item_text}>Dashboard</span>
               </NavLink>
-            </div>
+            </div> */}
             <div className={styles.nav}>
               <NavLink to="/books" className={styles.nav__item}>
                 <span className={styles.icon}>
@@ -100,14 +100,14 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.nav__item_text}>Category</span>
               </NavLink>
             </div>
-            <div className={styles.nav}>
+            {/* <div className={styles.nav}>
               <NavLink to="/settings" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <TiCogOutline />
                 </span>
                 <span className={styles.nav__item_text}>Settings</span>
               </NavLink>
-            </div>
+            </div> */}
 
             <div className={styles.nav}>
               <div className={styles.nav__item} onClick={logoutHandeler}>
@@ -127,12 +127,12 @@ const Layout = ({ logout, children, title }) => {
                 <GoThreeBars />
               </div>
               <h3 className="me-auto ps-4 fs-3 my-auto">{title}</h3>
-              <NavLink to="/notification" className={styles.right__item}>
+              {/* <NavLink to="/notification" className={styles.right__item}>
                 <IoMdNotificationsOutline />
-              </NavLink>
-              <NavLink to="/settings" className={styles.right__item}>
+              </NavLink> */}
+              {/* <NavLink to="/settings" className={styles.right__item}>
                 <TiCogOutline />
-              </NavLink>
+              </NavLink> */}
               {/* <UserInfoTopbar /> */}
             </div>
             <Container>{children}</Container>
