@@ -134,6 +134,7 @@ const AddBookForm = ({
     edition: data && data.edition ? data.edition : "",
     publisher: data && data.publisherId ? data.publisherId : "",
     author: data && data.writerId ? data.writerId : "",
+    language: data && data.language ? data.language : "",
     category: data && data.categoryId ? data.categoryId : "",
     subcategory: data && data.subCategoryId ? data.subCategoryId : "",
   };
@@ -146,7 +147,8 @@ const AddBookForm = ({
     isbn: Yup.string().required("ISBN is required!"),
     edition: Yup.string().required("Edition is required!"),
     description: Yup.string().required("Description is required!"),
-    publisher: Yup.string().required("Publisher is required!"),
+    description: Yup.string().required("Description is required!"),
+    language: Yup.string().required("Language is required!"),
     author: Yup.string().required("Author is required!"),
     category: Yup.string().required("Category is required!"),
     subcategory: Yup.string().required("Subcategory is required!"),
@@ -158,7 +160,7 @@ const AddBookForm = ({
           <h1 className="fs-4 fw-normal py-3">
             Fill the form to {update ? "update" : "add"} book
           </h1>
-          {author === null && category === null && publisher === null ? (
+          {author === null || category === null || publisher === null ? (
             <div
               className="d-flex justify-content-center align-items-center"
               style={{ minHeight: 700 }}
@@ -405,28 +407,55 @@ const AddBookForm = ({
                       </InputGroup>
                     </Col>
                   </Row>
+                  <Row>
+                    <Col>
+                      <InputGroup className="mb-3 d-flex flex-column">
+                        <div className="d-flex justify-content-between align-items-center pb-2">
+                          <label htmlFor="language" className="d-block">
+                            Language
+                          </label>
+                          {errors.language && touched.language ? (
+                            <small className="text-danger pt-2">
+                              {errors.language}
+                            </small>
+                          ) : null}
+                        </div>
+                        <Field
+                          as={BootstrapForm.Control}
+                          placeholder="language..."
+                          name="language"
+                          isValid={!errors.language && touched.language}
+                          type="text"
+                          className={`${styles.input} w-100`}
+                          isInvalid={errors.language && touched.language}
+                        />
+                      </InputGroup>
+                    </Col>
+                    <Col>
+                      <InputGroup className="mb-3 d-flex flex-column">
+                        <div className="d-flex justify-content-between align-items-center pb-2">
+                          <label htmlFor="isbn" className="d-block">
+                            ISBN
+                          </label>
+                          {errors.isbn && touched.isbn ? (
+                            <small className="text-danger pt-2">
+                              {errors.isbn}
+                            </small>
+                          ) : null}
+                        </div>
+                        <Field
+                          as={BootstrapForm.Control}
+                          placeholder="ISBN..."
+                          name="isbn"
+                          isValid={!errors.isbn && touched.isbn}
+                          type="text"
+                          className={`${styles.input} w-100`}
+                          isInvalid={errors.isbn && touched.isbn}
+                        />
+                      </InputGroup>
+                    </Col>
+                  </Row>
 
-                  <InputGroup className="mb-3 d-flex flex-column">
-                    <div className="d-flex justify-content-between align-items-center pb-2">
-                      <label htmlFor="isbn" className="d-block">
-                        ISBN
-                      </label>
-                      {errors.isbn && touched.isbn ? (
-                        <small className="text-danger pt-2">
-                          {errors.isbn}
-                        </small>
-                      ) : null}
-                    </div>
-                    <Field
-                      as={BootstrapForm.Control}
-                      placeholder="ISBN..."
-                      name="isbn"
-                      isValid={!errors.isbn && touched.isbn}
-                      type="text"
-                      className={`${styles.input} w-100`}
-                      isInvalid={errors.isbn && touched.isbn}
-                    />
-                  </InputGroup>
                   <InputGroup className="mb-3 d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center pb-2">
                       <label htmlFor="description" className="d-block">

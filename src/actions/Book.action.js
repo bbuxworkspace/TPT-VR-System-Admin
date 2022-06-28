@@ -68,6 +68,7 @@ export const createbook =
     formData.append("price", values.price);
     formData.append("page", values.page);
     formData.append("isbn", values.isbn);
+    formData.append("language", values.language);
     formData.append("description", values.description);
 
     if (image) {
