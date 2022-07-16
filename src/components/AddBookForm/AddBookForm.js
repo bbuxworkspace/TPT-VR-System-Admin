@@ -116,7 +116,11 @@ const AddBookForm = ({
 
       return;
     }
-    if (e.target.files[0].type !== "application/pdf") {
+    //console.log(e.target.files[0].type);
+    if (
+      e.target.files[0].type !== "application/pdf" &&
+      e.target.files[0].type !== "application/epub+zip"
+    ) {
       toast.error("File must be in PDF format");
       return;
     }
@@ -146,7 +150,6 @@ const AddBookForm = ({
     year: Yup.string().required("Year is required!"),
     isbn: Yup.string().required("ISBN is required!"),
     edition: Yup.string().required("Edition is required!"),
-    description: Yup.string().required("Description is required!"),
     description: Yup.string().required("Description is required!"),
     language: Yup.string().required("Language is required!"),
     author: Yup.string().required("Author is required!"),
