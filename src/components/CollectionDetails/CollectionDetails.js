@@ -113,12 +113,15 @@ const CollectionDetails = ({
             </div>
           ) : (
             <>
-              {collection.books.length === 0 && (
-                <span className="d-block text-center fs-4 lead pb-4">
-                  No Book Found!
-                </span>
-              )}
+              {collection &&
+                collection.books &&
+                collection.books.length === 0 && (
+                  <span className="d-block text-center fs-4 lead pb-4">
+                    No Book Found!
+                  </span>
+                )}
               {collection !== null &&
+                collection.books &&
                 collection.books.map((bookItem, i) => (
                   <Row
                     key={bookItem._id}

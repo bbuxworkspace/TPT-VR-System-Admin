@@ -73,14 +73,14 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.nav__item_text}>Featured</span>
               </NavLink>
             </div>
-            {/* <div className={styles.nav}>
+            <div className={styles.nav}>
               <NavLink to="/popularAuthor" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <BsVectorPen />
                 </span>
                 <span className={styles.nav__item_text}>Popular Author</span>
               </NavLink>
-            </div> */}
+            </div>
             <div className={styles.nav}>
               <NavLink to="/series" className={styles.nav__item}>
                 <span className={styles.icon}>

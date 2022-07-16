@@ -113,12 +113,15 @@ const TopAuthorDetails = ({
             </div>
           ) : (
             <>
-              {collection.authors.length === 0 && (
-                <span className="d-block text-center fs-4 lead pb-4">
-                  No Author Found!
-                </span>
-              )}
               {collection !== null &&
+                collection.authors &&
+                collection.authors.length === 0 && (
+                  <span className="d-block text-center fs-4 lead pb-4">
+                    No Author Found!
+                  </span>
+                )}
+              {collection !== null &&
+                collection.authors &&
                 collection.authors.map((authorItem, i) => (
                   <Row
                     key={authorItem._id}
