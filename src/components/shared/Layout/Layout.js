@@ -3,8 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import styles from "./Layout.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { BsFolderPlus } from "react-icons/bs";
-import { TiCogOutline } from "react-icons/ti";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { BsBookmarks } from "react-icons/bs";
 import { logout } from "../../../actions/Dashboard.action";
 import { connect } from "react-redux";
 import { FiLogOut } from "react-icons/fi";
@@ -65,6 +64,14 @@ const Layout = ({ logout, children, title }) => {
                   <ImStack />
                 </span>
                 <span className={styles.nav__item_text}>Collection</span>
+              </NavLink>
+            </div>
+            <div className={styles.nav}>
+              <NavLink to="/shelf" className={styles.nav__item}>
+                <span className={styles.icon}>
+                  <BsBookmarks />
+                </span>
+                <span className={styles.nav__item_text}>Book Shelf</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
