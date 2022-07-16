@@ -29,7 +29,7 @@ const ShelfList = () => {
               <Col md={11} className="">
                 <div className="d-flex align-items-center h-100">
                   <Link
-                    to={`/collection/${colItem.type}`}
+                    to={`/featured/${colItem.type}`}
                     className={` fw-bold ${styles.link}`}
                   >
                     {colItem.name}

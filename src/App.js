@@ -31,6 +31,8 @@ import SeriesDetailsPage from "./views/SeriesDetailsPage/SeriesDetailsPage";
 import CollectionPage from "./views/CollectionPage/CollectionPage";
 import CollectionDetailsPage from "./views/CollectionDetailsPage/CollectionDetailsPage";
 import TypesPage from "./views/TypesPage/TypesPage";
+import FeatuedDetailsPage from "./views/FeatuedDetailsPage/FeatuedDetailsPage";
+import TopAuthorPage from "./views/TopAuthorPage/TopAuthorPage";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -55,7 +57,7 @@ function App({ getRefreshToken }) {
               <Route path="books/add" element={<AddBookPage />} />
               <Route path="category" element={<CategoryPage />} />
               <Route path="collection" element={<CollectionPage />} />
-              <Route path="shelf" element={<TypesPage />} />
+              <Route path="featured" element={<TypesPage />} />
               <Route path="series" element={<SeriesPage />} />
               <Route path="author" element={<AuthorPage />} />
               <Route path="publisher" element={<PublisherPage />} />
@@ -79,6 +81,8 @@ function App({ getRefreshToken }) {
                 path="collection/:id"
                 element={<CollectionDetailsPage />}
               />
+              <Route path="featured/:id" element={<FeatuedDetailsPage />} />
+              <Route path="popularAuthor" element={<TopAuthorPage />} />
               <Route
                 path="series/:id/edit"
                 element={<AddSeriesPage edit={true} />}

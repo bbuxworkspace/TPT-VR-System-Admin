@@ -2,8 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "./Layout.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { BsFolderPlus } from "react-icons/bs";
-import { BsBookmarks } from "react-icons/bs";
+import { BsBookmarks, BsVectorPen, BsFolderPlus } from "react-icons/bs";
 import { logout } from "../../../actions/Dashboard.action";
 import { connect } from "react-redux";
 import { FiLogOut } from "react-icons/fi";
@@ -67,11 +66,19 @@ const Layout = ({ logout, children, title }) => {
               </NavLink>
             </div>
             <div className={styles.nav}>
-              <NavLink to="/shelf" className={styles.nav__item}>
+              <NavLink to="/featured" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <BsBookmarks />
                 </span>
-                <span className={styles.nav__item_text}>Book Shelf</span>
+                <span className={styles.nav__item_text}>Featured</span>
+              </NavLink>
+            </div>
+            <div className={styles.nav}>
+              <NavLink to="/popularAuthor" className={styles.nav__item}>
+                <span className={styles.icon}>
+                  <BsVectorPen />
+                </span>
+                <span className={styles.nav__item_text}>Popular Author</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
