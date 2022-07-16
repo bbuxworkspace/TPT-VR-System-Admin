@@ -1,6 +1,7 @@
 .crd {
   padding: 20px 10px;
   border-radius: 5px;
+  background: #fff;
   border-left: 4px solid var(--primary) !important;
   box-shadow: var(--box-shadow-1);
 }
