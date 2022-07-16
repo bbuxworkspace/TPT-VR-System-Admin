@@ -307,8 +307,8 @@ const AddBookForm = ({
                           }}
                           searchable={true}
                           error={
-                            errors.category && touched.category
-                              ? errors.category
+                            errors.subcategory && touched.subcategory
+                              ? errors.subcategory
                               : null
                           }
                         />
