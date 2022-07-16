@@ -6,17 +6,25 @@ import {
   AUTH_USER_LOAD,
   ACCESS_TOKEN_SUCCESS,
   ACCESS_TOKEN_ERROR,
+  GET_DASHBOARD_DATA,
 } from "../constants/Type";
 
 const initialState = {
   token: localStorage.getItem("token_book") || "",
   isAuthenticated: false,
   user: null,
+  dashboard: null,
   loading: true,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_DASHBOARD_DATA:
+      return {
+        ...state,
+        dashboard: action.payload,
+        loading: false,
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,

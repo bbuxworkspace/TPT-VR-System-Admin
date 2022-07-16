@@ -43,14 +43,14 @@ const Layout = ({ logout, children, title }) => {
               </div>
             </div>
 
-            {/* <div className={styles.nav}>
+            <div className={styles.nav}>
               <NavLink to="/dashboard" className={styles.nav__item}>
                 <span className={styles.icon}>
                   <AiOutlineHome />
                 </span>
                 <span className={styles.nav__item_text}>Dashboard</span>
               </NavLink>
-            </div> */}
+            </div>
             <div className={styles.nav}>
               <NavLink to="/books" className={styles.nav__item}>
                 <span className={styles.icon}>

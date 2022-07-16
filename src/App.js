@@ -48,8 +48,8 @@ function App({ getRefreshToken }) {
 
           <Route path="/*" element={<PrivateOutlet />}>
             <>
-              {/* <Route path="dashboard" element={<DashboardPage />} /> */}
-              <Route path="dashboard" element={<BookPage />} />
+              <Route path="dashboard" element={<DashboardPage />} />
+              {/* <Route path="dashboard" element={<BookPage />} /> */}
               <Route path="books" element={<BookPage />} />
               <Route path="books/add" element={<AddBookPage />} />
               <Route path="category" element={<CategoryPage />} />

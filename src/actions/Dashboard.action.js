@@ -9,6 +9,7 @@ import {
   AUTH_USER_LOAD,
   AUTH_USER_LOAD_ERROR,
   LOGOUT_FAIL,
+  GET_DASHBOARD_DATA,
 } from "../constants/Type";
 import { BASE_URL } from "../constants/URL";
 import setAuthToken from "../utils/setAuthToken";
@@ -136,6 +137,28 @@ export const getProfileData = () => async (dispatch) => {
     dispatch({
       type: AUTH_USER_LOAD_ERROR,
     });
+    //error.response.data.msg.map((msg) => console.log(msg));
+    return false;
+  }
+};
+
+//GET Dashboard DATA
+export const getDashboardData = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${BASE_URL}/api/v1/dashboard`, {
+      withCredentials: true,
+    });
+
+    //console.log(res);
+    dispatch({
+      type: GET_DASHBOARD_DATA,
+      payload: res.data.data,
+    });
+
+    return true;
+    //}
+  } catch (error) {
+    console.log(error);
     //error.response.data.msg.map((msg) => console.log(msg));
     return false;
   }
