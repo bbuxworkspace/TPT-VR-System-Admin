@@ -21,6 +21,9 @@ const DashboardPage = ({ data, getDashboardData }) => {
       ) : (
         <Row className="pt-4">
           <Col md={3}>
+            <StatCard title="Books" icon={<BiBook />} count={data.bookCount} />
+          </Col>
+          <Col md={3}>
             <StatCard
               title="Authors"
               icon={<BsPencil />}
@@ -36,9 +39,6 @@ const DashboardPage = ({ data, getDashboardData }) => {
           </Col>
           <Col md={3}>
             <StatCard title="Users" icon={<FiUsers />} count={data.userCount} />
-          </Col>
-          <Col md={3}>
-            <StatCard title="Books" icon={<BiBook />} count={data.bookCount} />
           </Col>
         </Row>
       )}
