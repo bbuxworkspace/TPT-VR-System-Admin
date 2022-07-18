@@ -119,7 +119,7 @@ const AddBookForm = ({
     //console.log(e.target.files[0].type);
     if (
       e.target.files[0].type !== "application/pdf" &&
-      e.target.files[0].type !== "application/epub+zip"
+      !e.target.files[0].type.includes("epub")
     ) {
       toast.error("File must be in PDF format");
       return;
@@ -132,7 +132,7 @@ const AddBookForm = ({
     name: data && data.name ? data.name : "",
     price: data && data.price ? data.price : 0,
     page: data && data.page ? data.page : 0,
-    isbn: data && data.isbn ? data.isbn : "",
+    //isbn: data && data.isbn ? data.isbn : "",
     year: data && data.year ? data.year : "",
     description: data && data.description ? data.description : "",
     edition: data && data.edition ? data.edition : "",
@@ -148,7 +148,7 @@ const AddBookForm = ({
     price: Yup.string().required("Price is required!"),
     page: Yup.string().required("Page is required!"),
     year: Yup.string().required("Year is required!"),
-    isbn: Yup.string().required("ISBN is required!"),
+    //isbn: Yup.string().required("ISBN is required!"),
     edition: Yup.string().required("Edition is required!"),
     description: Yup.string().required("Description is required!"),
     language: Yup.string().required("Language is required!"),
@@ -206,58 +206,68 @@ const AddBookForm = ({
                       <label htmlFor="publisher" className="d-block">
                         Publisher
                       </label>
-                      <Select
-                        placeholder="Pick one publisher..."
-                        data={
-                          publisher &&
-                          publisher.items.map((item) => {
-                            return { value: item._id, label: item.name };
-                          })
-                        }
-                        id="publisher"
-                        autoComplete="off"
-                        value={values.publisher}
-                        onChange={(e) => {
-                          setFieldValue("publisher", e);
-                        }}
-                        defaultValue={values.publisher}
-                        searchable={true}
-                        error={
-                          errors.publisher && touched.publisher
-                            ? errors.publisher
-                            : null
-                        }
-                      />
+                      {publisher ? (
+                        <Select
+                          placeholder="Pick one publisher..."
+                          data={
+                            publisher &&
+                            publisher.items.map((item) => {
+                              return { value: item._id, label: item.name };
+                            })
+                          }
+                          id="publisher"
+                          autoComplete="off"
+                          value={values.publisher}
+                          onChange={(e) => {
+                            setFieldValue("publisher", e);
+                          }}
+                          defaultValue={values.publisher}
+                          searchable={true}
+                          error={
+                            errors.publisher && touched.publisher
+                              ? errors.publisher
+                              : null
+                          }
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </Col>
                     <Col className="pb-3">
                       <label htmlFor="author" className="d-block">
                         Author
                       </label>
-                      <Select
-                        placeholder="Pick one author..."
-                        data={
-                          author !== null
-                            ? author.items.map((item) => {
-                                return { value: item._id, label: item.name };
-                              })
-                            : null
-                        }
-                        id="author"
-                        defaultValue={values.author}
-                        value={values.author}
-                        autoComplete="off"
-                        onChange={(e) => {
-                          setFieldValue("author", e);
-                        }}
-                        searchable={true}
-                        error={
-                          errors.author && touched.author ? errors.author : null
-                        }
-                      />
+                      {author ? (
+                        <Select
+                          placeholder="Pick one author..."
+                          data={
+                            author !== null
+                              ? author.items.map((item) => {
+                                  return { value: item._id, label: item.name };
+                                })
+                              : null
+                          }
+                          id="author"
+                          defaultValue={values.author}
+                          value={values.author}
+                          autoComplete="off"
+                          onChange={(e) => {
+                            setFieldValue("author", e);
+                          }}
+                          searchable={true}
+                          error={
+                            errors.author && touched.author
+                              ? errors.author
+                              : null
+                          }
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </Col>
                   </Row>
                   <Row>
-                    {category && (
+                    {category !== null && (
                       <Col className="pb-3">
                         <label htmlFor="category" className="d-block">
                           Category
@@ -288,7 +298,7 @@ const AddBookForm = ({
                         />
                       </Col>
                     )}
-                    {subcategory && (
+                    {subcategory !== null && (
                       <Col className="pb-3">
                         <label htmlFor="subcategory" className="d-block">
                           Subcategory
@@ -434,7 +444,7 @@ const AddBookForm = ({
                         />
                       </InputGroup>
                     </Col>
-                    <Col>
+                    {/* <Col>
                       <InputGroup className="mb-3 d-flex flex-column">
                         <div className="d-flex justify-content-between align-items-center pb-2">
                           <label htmlFor="isbn" className="d-block">
@@ -456,7 +466,7 @@ const AddBookForm = ({
                           isInvalid={errors.isbn && touched.isbn}
                         />
                       </InputGroup>
-                    </Col>
+                    </Col> */}
                   </Row>
 
                   <InputGroup className="mb-3 d-flex flex-column">
