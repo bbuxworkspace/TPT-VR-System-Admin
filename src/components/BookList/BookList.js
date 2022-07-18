@@ -171,12 +171,9 @@ const BookList = ({ book, getBookList, deletebook }) => {
                     </Col>
                     <Col md={9} className="">
                       <div className="d-flex align-items-center h-100">
-                        <Link
-                          to={`/books/${bookItem._id}`}
-                          className={` fw-bold ${styles.link}`}
-                        >
+                        <span className={` fw-bold ${styles.link}`}>
                           {bookItem.name}
-                        </Link>
+                        </span>
                       </div>
                     </Col>
 

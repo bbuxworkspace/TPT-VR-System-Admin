@@ -41,13 +41,11 @@ const AddBookForm = ({
   const [AudioFile, setAudioFile] = useState(undefined);
   const [PdfFile, setPdfFile] = useState(undefined);
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(
+    data && data.categoryId ? data.categoryId : ""
+  );
 
   useEffect(() => {
-    fetchDatas();
-  }, [author, publisher, category]);
-
-  const fetchDatas = () => {
     if (author === null) {
       getAuthorList();
     }
@@ -65,7 +63,7 @@ const AddBookForm = ({
       setSelectedCategory(data.categoryId);
       getSubCategoryList(data.categoryId);
     }
-  };
+  }, [author, publisher, category]);
 
   const onSubmitHandeler = async (values) => {
     setIsLoading(true);
@@ -136,11 +134,11 @@ const AddBookForm = ({
     year: data && data.year ? data.year : "",
     description: data && data.description ? data.description : "",
     edition: data && data.edition ? data.edition : "",
-    publisher: data && data.publisherId ? data.publisherId : "",
-    author: data && data.writerId ? data.writerId : "",
+    publisher: data && data.publisher._id ? data.publisher._id : "",
+    author: data && data.writer._id ? data.writer._id : "",
     language: data && data.language ? data.language : "",
-    category: data && data.categoryId ? data.categoryId : "",
-    subcategory: data && data.subCategoryId ? data.subCategoryId : "",
+    category: data && data.category._id ? data.category._id : "",
+    subcategory: data && data.subCategory._id ? data.subCategory._id : "",
   };
 
   const SignupSchema = Yup.object().shape({
