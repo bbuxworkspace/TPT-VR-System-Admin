@@ -9,9 +9,7 @@ const CollectionDetailsPage = ({ collection }) => {
 
   return (
     <Layout
-      title={`Collection: ${
-        collection !== null ? collection.name : "Loading..."
-      }`}
+      title={`Home: ${collection !== null ? collection.name : "Loading..."}`}
     >
       <CollectionDetails id={id} />
     </Layout>

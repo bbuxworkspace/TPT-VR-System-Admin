@@ -23,3 +23,15 @@
   font-size: 24px;
   font-weight: 600;
 }
+
+.link {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s all ease-in-out;
+}
+
+.link:hover {
+  color: var(--primary);
+  transition: 0.3s all ease-in-out;
+}

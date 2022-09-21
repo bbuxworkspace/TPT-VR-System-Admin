@@ -62,7 +62,7 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.icon}>
                   <ImStack />
                 </span>
-                <span className={styles.nav__item_text}>Collection</span>
+                <span className={styles.nav__item_text}>Home</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
@@ -70,7 +70,7 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.icon}>
                   <BsBookmarks />
                 </span>
-                <span className={styles.nav__item_text}>Featured</span>
+                <span className={styles.nav__item_text}>Store</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
@@ -78,7 +78,7 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.icon}>
                   <BsVectorPen />
                 </span>
-                <span className={styles.nav__item_text}>Popular Author</span>
+                <span className={styles.nav__item_text}>Top Authors</span>
               </NavLink>
             </div>
             <div className={styles.nav}>

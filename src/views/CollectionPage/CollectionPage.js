@@ -4,7 +4,7 @@ import Layout from "../../components/shared/Layout/Layout";
 
 const CollectionPage = () => {
   return (
-    <Layout title={"Collection"}>
+    <Layout title={"Home"}>
       <CollectionList />
     </Layout>
   );

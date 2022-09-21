@@ -6,7 +6,7 @@ import { TopAuthorDetails } from "../../components/TopAuthorDetails";
 const TopAuthorPage = ({ collection }) => {
   return (
     <Layout
-      title={`Popular Authors: ${
+      title={`Top Authors: ${
         collection !== null ? collection.name : "Loading..."
       }`}
     >

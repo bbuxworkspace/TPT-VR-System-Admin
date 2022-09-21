@@ -4,7 +4,7 @@ import { ShelfList } from "../../components/ShelfList";
 
 const TypesPage = () => {
   return (
-    <Layout title={"Featured"}>
+    <Layout title={"Store"}>
       <ShelfList />
     </Layout>
   );

@@ -9,9 +9,7 @@ const FeatuedDetailsPage = ({ collection }) => {
 
   return (
     <Layout
-      title={`Featured: ${
-        collection !== null ? collection.name : "Loading..."
-      }`}
+      title={`Store: ${collection !== null ? collection.name : "Loading..."}`}
     >
       <CollectionDetails id={id} />
     </Layout>
