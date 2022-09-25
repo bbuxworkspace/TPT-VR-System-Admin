@@ -33,6 +33,7 @@ import CollectionDetailsPage from "./views/CollectionDetailsPage/CollectionDetai
 import TypesPage from "./views/TypesPage/TypesPage";
 import FeatuedDetailsPage from "./views/FeatuedDetailsPage/FeatuedDetailsPage";
 import TopAuthorPage from "./views/TopAuthorPage/TopAuthorPage";
+import TopPublisherPage from "./views/TopPublisherPage/TopPublisherPage";
 
 function App({ getRefreshToken }) {
   useEffect(() => {
@@ -83,6 +84,7 @@ function App({ getRefreshToken }) {
               />
               <Route path="featured/:id" element={<FeatuedDetailsPage />} />
               <Route path="popularAuthor" element={<TopAuthorPage />} />
+              <Route path="topPublisher" element={<TopPublisherPage />} />
               <Route
                 path="series/:id/edit"
                 element={<AddSeriesPage edit={true} />}

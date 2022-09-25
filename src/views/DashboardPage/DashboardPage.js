@@ -62,7 +62,7 @@ const DashboardPage = ({ data, getDashboardData }) => {
             <StatCard
               title="Top Publishers"
               icon={<BsArrowLeft />}
-              link="/publisher"
+              link="/topPublisher"
             />
           </Col>
         </Row>
