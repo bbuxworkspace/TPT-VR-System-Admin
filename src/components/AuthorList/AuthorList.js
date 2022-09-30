@@ -107,7 +107,7 @@ const AuthorList = ({ author, getAuthorList, deleteAuthor }) => {
     <Container className="pb-4">
       <div className="d-flex justify-content-between align-items-center pb-3 ">
         <div className="d-flex align-items-center w-100">
-          <span className="d-block fs-4">Search Author</span>
+          <span className="d-block fs-4">Search Authors</span>
           <Form.Control
             type="text"
             placeholder="Search author by name..."

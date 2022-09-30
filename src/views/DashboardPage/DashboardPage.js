@@ -32,7 +32,7 @@ const DashboardPage = ({ data, getDashboardData }) => {
           </Col>
           <Col md={3} className="py-3">
             <StatCard
-              title="Publisers"
+              title="Publishers"
               icon={<BsPrinter />}
               count={data.publisherCount}
             />

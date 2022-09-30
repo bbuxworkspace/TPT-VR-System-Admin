@@ -130,10 +130,10 @@ export const updatebook =
     if (image) {
       formData.append("image", image);
     }
-    if (image) {
+    if (PdfFile) {
       formData.append("pdfFile", PdfFile);
     }
-    if (image) {
+    if (AudioFile) {
       formData.append("audioFile", AudioFile);
     }
 

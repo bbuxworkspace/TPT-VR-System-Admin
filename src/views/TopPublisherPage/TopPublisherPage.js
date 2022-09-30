@@ -6,7 +6,7 @@ import { TopPublishers } from "../../components/TopPublishers";
 const TopPublisherPage = ({ collection }) => {
   return (
     <Layout
-      title={`Top Publisher: ${
+      title={`Top Publishers: ${
         collection !== null ? collection.name : "Loading..."
       }`}
     >

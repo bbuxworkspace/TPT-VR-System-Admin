@@ -91,7 +91,7 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.icon}>
                   <BsBookmarkStar />
                 </span>
-                <span className={styles.nav__item_text}>Top Publisher</span>
+                <span className={styles.nav__item_text}>Top Publishers</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
@@ -107,7 +107,7 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.icon}>
                   <AiOutlineUser />
                 </span>
-                <span className={styles.nav__item_text}>Author</span>
+                <span className={styles.nav__item_text}>Authors</span>
               </NavLink>
             </div>
             <div className={styles.nav}>
@@ -115,7 +115,7 @@ const Layout = ({ logout, children, title }) => {
                 <span className={styles.icon}>
                   <BiPrinter />
                 </span>
-                <span className={styles.nav__item_text}>Publisher</span>
+                <span className={styles.nav__item_text}>Publishers</span>
               </NavLink>
             </div>
 

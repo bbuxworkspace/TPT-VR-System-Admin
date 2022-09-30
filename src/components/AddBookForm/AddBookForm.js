@@ -433,7 +433,7 @@ const AddBookForm = ({
                         </div>
                         <Field
                           as={BootstrapForm.Control}
-                          placeholder="language..."
+                          placeholder="Language..."
                           name="language"
                           isValid={!errors.language && touched.language}
                           type="text"
@@ -491,7 +491,7 @@ const AddBookForm = ({
                   <InputGroup className="mb-3 d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center pb-2">
                       <label htmlFor="image" className="d-block">
-                        Book Image
+                        Book Image {data && data.image ? `(Uploaded)` : ""}
                       </label>
                     </div>
                     <BootstrapForm.Control
@@ -504,7 +504,7 @@ const AddBookForm = ({
                   <InputGroup className="mb-3 d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center pb-2">
                       <label htmlFor="pdf" className="d-block">
-                        PDF File
+                        EPUB File {data && data.pdfFile ? `(Uploaded)` : ""}
                       </label>
                     </div>
                     <BootstrapForm.Control
@@ -517,7 +517,7 @@ const AddBookForm = ({
                   <InputGroup className="mb-3 d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center pb-2">
                       <label htmlFor="audio" className="d-block">
-                        Audio File
+                        Audio File {data && data.audioFile ? `(Uploaded)` : ""}
                       </label>
                     </div>
                     <BootstrapForm.Control

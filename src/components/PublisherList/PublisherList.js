@@ -108,7 +108,7 @@ const PublisherList = ({ publisher, getPublisherList, deletePublisher }) => {
     <Container className="pb-4">
       <div className="d-flex justify-content-between align-items-center pb-3 ">
         <div className="d-flex align-items-center w-100">
-          <span className="d-block fs-4">Search publisher</span>
+          <span className="d-block fs-4">Search publishers</span>
           <Form.Control
             type="text"
             placeholder="Search publisher by name..."

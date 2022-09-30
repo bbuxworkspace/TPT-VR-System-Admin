@@ -13,6 +13,7 @@ import styles from "./Login.module.css";
 import { login } from "../../actions/Dashboard.action";
 import { connect, useSelector } from "react-redux";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import logo from "../../assets/logo.png";
 
 const Login = ({ login }) => {
   const navigate = useNavigate();
@@ -59,10 +60,10 @@ const Login = ({ login }) => {
       <div className={styles.wrapper}>
         <Card bg="light" text="dark" className={`${styles.crd} shadow`}>
           <Card.Body>
-            <h1 className="fs-4 fw-normal py-3">
-              Sign in to continue <br />
-              your journey
-            </h1>
+            <div className="d-flex justify-content-center">
+              <img src={logo} alt="" className="w-25" />
+            </div>
+            <h1 className="fs-4 fw-normal py-3 text-center">BOIMELA ADMIN</h1>
             <Formik
               initialValues={initVals}
               validationSchema={SignupSchema}
@@ -102,6 +103,7 @@ const Login = ({ login }) => {
                     <Field
                       as={BootstrapForm.Control}
                       name="password"
+                      placeholder="Type Password..."
                       isValid={!errors.password && touched.password}
                       type={isPasswordVisible ? "text" : "password"}
                       className={`${styles.input} w-100 icon-hidden`}
