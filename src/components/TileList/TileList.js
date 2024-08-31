@@ -22,16 +22,23 @@ const TileList = ({ tiles, getTileList, deleteTile }) => {
   const parsed = queryString.parse(location.search);
   let page = 1;
 
+
+
   useEffect(() => {
+
     if (parsed.page) {
       page = parsed.page;
     }
 
     if (!tiles) {
-      getTileList(page);
+
+      const loadTiles = async () => {
+        const tilesFromServer = await getTileList();
+        setList(tilesFromServer);
+      };
+      loadTiles();
     }
 
-    setList(tiles);
   }, [tiles]);
 
   const [searchText, setSearchText] = useState("");

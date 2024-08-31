@@ -10,7 +10,13 @@ import { BiBook, BiSquare } from "react-icons/bi";
 
 const DashboardPage = ({ data, getDashboardData }) => {
   useEffect(() => {
-    getDashboardData();
+
+    if( data == null ){
+      const loadData = async () => {
+        await getDashboardData();
+      };
+      loadData();
+    }
   }, [getDashboardData]);
   return (
     <Layout title="Dashboard">
