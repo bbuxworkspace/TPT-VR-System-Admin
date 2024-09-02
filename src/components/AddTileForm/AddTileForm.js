@@ -178,14 +178,18 @@ const AddTileForm = ({ createTile, update, data, updateTile }) => {
                     ) : null}
                   </div>
                   <Field
-                    as={BootstrapForm.Control}
-                    placeholder="Type category..."
+                    as={BootstrapForm.Select}  // Use Select component for dropdown
                     name="category"
-                    isValid={!errors.category && touched.category}
-                    type="text"
                     className={`${styles.input} w-100`}
                     isInvalid={errors.category && touched.category}
-                  />
+                  >
+                    <option value="">Select Category</option>
+                    <option value="Floor">Floor</option>
+                    <option value="Bathroom">Bathroom</option>
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Wall">Wall</option>
+                    <option value="Outdoor">Outdoor</option>
+                  </Field>
                 </InputGroup>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center pb-2">
