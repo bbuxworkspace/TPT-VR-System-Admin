@@ -18,7 +18,7 @@ const DashboardPage = ({ data, getDashboardData, getTileList  }) => {
 
     const loadData = async () => {
       await getDashboardData();
-      await getTileList();
+      await getTileList(1);
     };
 
     loadData();

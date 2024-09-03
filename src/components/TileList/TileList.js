@@ -14,7 +14,8 @@ import { BASE_URL } from "../../constants/URL";
 const queryString = require("query-string");
 
 const TileList = ({ tiles, getTileList, deleteTile }) => {
-  const [list, setList] = useState(tiles === null ? [] : tiles);
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const modals = useModals();
   const navigate = useNavigate();
 
@@ -22,24 +23,26 @@ const TileList = ({ tiles, getTileList, deleteTile }) => {
   const parsed = queryString.parse(location.search);
   let page = 1;
 
-
-
   useEffect(() => {
-
     if (parsed.page) {
       page = parsed.page;
     }
 
-    if (!tiles) {
+    const loadTiles = async () => {
+      setLoading(true);
+      const tilesFromServer = await getTileList(page);
+      setList(tilesFromServer || []);
+      setLoading(false);
+    };
 
-      const loadTiles = async () => {
-        const tilesFromServer = await getTileList();
-        setList(tilesFromServer);
-      };
+    // Call loadTiles if tiles are not yet fetched or page changes
+    if (!tiles || tiles.length === 0 || parsed.page) {
       loadTiles();
+    } else {
+      setList(tiles);
+      setLoading(false);
     }
-
-  }, [tiles]);
+  }, [tiles, parsed.page]);
 
   const [searchText, setSearchText] = useState("");
 
